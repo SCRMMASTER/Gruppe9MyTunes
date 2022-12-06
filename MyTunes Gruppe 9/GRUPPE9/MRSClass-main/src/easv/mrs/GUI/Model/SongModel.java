@@ -41,9 +41,9 @@ public class SongModel {
     }
 
 
-    public void createNewSong(String artist, String songtitle, String album, int year, String genre) throws Exception{
+    public void createNewSong(String artist, String songtitle, String album, int year, String genre, float duration, String filepath) throws Exception{
         // Create movie in data storage
-        Song s = songManager.createNewSong(artist, songtitle, album, year, genre);
+        Song s = songManager.createNewSong(artist, songtitle, album, year, genre, duration, filepath);
 
         // Add movie to observable list (gui)
         songsToBeHeard.add(s);
@@ -51,7 +51,7 @@ public class SongModel {
 
     public void updateSong(Song updatedSong) throws Exception {
         // Call BLL
-        // update movie in DB
+        // update song in DB
         songManager.updateSong(updatedSong);
 
         // update ListView

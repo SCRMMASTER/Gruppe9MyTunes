@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class SongDetailsViewController extends BaseController {
 
     @FXML
-    private TextField txtArtist, txtSongTitle, txtAlbum, txtYear, txtGenre;
+    private TextField txtArtist, txtSongTitle, txtAlbum, txtYear, txtGenre, txtDuration, txtFilepath;
 
     private SongModel model;
 
@@ -25,12 +25,12 @@ public class SongDetailsViewController extends BaseController {
         String updatedartist = txtArtist.getText();
         String updatedsongtitle = txtSongTitle.getText();
         String updatedalbum = txtAlbum.getText();
-        //int updatedalbumtrack = Integer.parseInt(txtAlbumTrack.getText());
         int updatedyear = Integer.parseInt(txtYear.getText());
-        //float updatedduration = Float.parseFloat(txtDuration.getText());
         String updatedgenre = txtGenre.getText();
+        float updatedduration = Float.parseFloat(txtDuration.getText());
+        String updatedfilepath = txtFilepath.getText();
 
-        Song updatedSong = new Song(model.getSelectedSong().getId(), updatedartist, updatedsongtitle, updatedalbum, updatedyear, updatedgenre);
+        Song updatedSong = new Song(model.getSelectedSong().getId(), updatedartist, updatedsongtitle, updatedalbum, updatedyear, updatedgenre, updatedduration, updatedfilepath);
 
         model.updateSong(updatedSong);
 

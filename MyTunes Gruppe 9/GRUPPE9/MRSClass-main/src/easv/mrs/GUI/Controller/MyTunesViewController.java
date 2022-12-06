@@ -50,6 +50,8 @@ public class MyTunesViewController extends BaseController implements Initializab
 
     @FXML
     private TextField txtGenre;
+    @FXML
+    private TextField txtFilepath;
 
     private SongModel songModel;
 
@@ -121,13 +123,13 @@ public class MyTunesViewController extends BaseController implements Initializab
         String artist = txtArtist.getText();
         String songtitle = txtSongTitle.getText();
         String album = txtAlbum.getText();
-        //int albumtrack = Integer.parseInt(txtAlbumTrack.getText());
         int year = Integer.parseInt(txtYear.getText());
-        //float duration = Float.parseFloat(txtDuration.getText());
         String genre = txtGenre.getText();
+        float duration = Float.parseFloat(txtDuration.getText());
+        String filepath = txtFilepath.getText();
 
         try {
-            songModel.createNewSong(artist, songtitle, album, year, genre);
+            songModel.createNewSong(artist, songtitle, album, year, genre, duration, filepath);
         } catch (Exception e) {
         }
     }

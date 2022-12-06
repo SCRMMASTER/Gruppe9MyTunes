@@ -30,8 +30,8 @@ public class SongManager {
         return searchResult;
     }
 
-    public Song createNewSong(String artist, String songtitle, String album, int year, String genre) throws Exception {
-        return songDAO.createSong(artist, songtitle, album, year, genre);
+    public Song createNewSong(String artist, String songtitle, String album, int year, String genre, float duration, String filepath) throws Exception {
+        return songDAO.createSong(artist, songtitle, album, year, genre, duration, filepath);
     }
 
     public void updateSong(Song updatedSong) throws Exception {
