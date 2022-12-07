@@ -6,7 +6,7 @@ public class Song {
     private String artist;
     private String songtitle;
     private String album;
-    private int albumtrack;
+
     private int year;
     private String genre;
 

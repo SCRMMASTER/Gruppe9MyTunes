@@ -7,6 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ *@author Magnus, Johnni & Jesper
+*/
+
 public class SongDAO_DB implements MyTunesDataAccess {
     private MyDatabaseConnector databaseConnector;
 
@@ -14,6 +18,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
         databaseConnector = new MyDatabaseConnector();
     }
 
+    //Get all Songs
     public List<Song> getAllSongs() throws Exception {
 
         ArrayList<Song> allSongs = new ArrayList<>();
@@ -26,10 +31,10 @@ public class SongDAO_DB implements MyTunesDataAccess {
 
             ResultSet rs = stmt.executeQuery(sql);
 
-            // Loop through rows from the database result set
+            // Loop through all the rows of the database
             while (rs.next()) {
 
-                //Map DB row to Song object
+                //Map the Database roes to the Song object
 
                 int id = rs.getInt("ID");
                 String artist = rs.getString("Artist");
@@ -39,11 +44,13 @@ public class SongDAO_DB implements MyTunesDataAccess {
                 String genre = rs.getString("Genre");
                 float duration = rs.getFloat("Duration");
                 String filepath = rs.getString("Filepath");
+
                 Song song = new Song(id, artist, songtitle, album, year, genre, duration, filepath );
                 allSongs.add(song);
             }
-            System.out.println(allSongs.size());
 
+            System.out.println(allSongs.size());
+            //Return all songs
             return allSongs;
 
         }
@@ -54,9 +61,10 @@ public class SongDAO_DB implements MyTunesDataAccess {
         }
     }
 
+    //Create a new Song object.
     public Song createSong(String artist, String songtitle, String album, int year, String genre, float duration, String filepath) throws Exception {
 
-        // Dynamic SQL
+        // Sql Command
 
 
         String sql = "INSERT INTO Songs (artist,songtitle, album, year, genre, duration, filepath) VALUES (?,?,?,?,?,?,?);";
@@ -64,7 +72,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
         try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            // Bind parameters
+            // Bind the parameters
             stmt.setString(1, artist);
             stmt.setString(2, songtitle);
             stmt.setString(3, album);
@@ -74,7 +82,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
             stmt.setString(7, filepath);
 
 
-            // Run the specified SQL statement
+            // Run the SQL statement
             stmt.executeUpdate();
 
             // Get the generated ID from the DB
@@ -97,6 +105,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
 
     }
 
+    //Update a Song
     public void updateSong(Song song) throws Exception {
 
         try (Connection conn = databaseConnector.getConnection()) {
@@ -105,7 +114,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
 
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            // Bind parameters
+            // Bind the parameters
             stmt.setString(1, song.getArtist());
             stmt.setString( 2, song.getSongtitle());
             stmt.setString(3, song.getAlbum());
@@ -114,6 +123,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
             stmt.setFloat(6, song.getDuration());
             stmt.setString(7, song.getFilepath());
 
+            //Run the SQL Command
             stmt.executeUpdate();
         }
         catch (SQLException ex) {
@@ -121,15 +131,28 @@ public class SongDAO_DB implements MyTunesDataAccess {
             throw new Exception("Could not update song", ex);
         }
 
-
-        // UPDATE Movie SET Title = 'Terminator 1', Year = 1990
-        //WHERE Id = 1
-
     }
 
-    public void deleteSong(Song song) throws Exception {
-        //TODO Do this
-        throw new UnsupportedOperationException();
+    //Delete selected song
+
+    public void deleteSong(Song selectedSong) throws Exception {
+        try (Connection conn = databaseConnector.getConnection()){
+
+            //SQL Command
+            String sql = "DELETE FROM Songs WHERE id = ?;";
+
+            //Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, selectedSong.getId());
+
+            //Run the statement
+            stmt.executeUpdate();
+
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not delete Song...", ex);
+        }
     }
 
     public List<Song> searchSongs(String query) throws Exception {
