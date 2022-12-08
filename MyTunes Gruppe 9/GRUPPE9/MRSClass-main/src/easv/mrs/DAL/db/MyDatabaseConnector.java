@@ -10,8 +10,6 @@ import java.sql.SQLException;
 public class MyDatabaseConnector {
 
 
-    //Class will easv.mrs.be included when we start working on DATABASES
-
     private SQLServerDataSource dataSource;
 
     public MyDatabaseConnector()

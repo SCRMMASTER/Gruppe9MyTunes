@@ -1,13 +1,9 @@
 package easv.mrs.BLL;
 
-//import easv.mrs.BE.Movie;
-//import easv.mrs.BLL.util.MovieSearcher;
 import easv.mrs.BE.Song;
 import easv.mrs.BLL.util.SongSearcher;
-//import easv.mrs.DAL.IMovieDataAccess;
 import easv.mrs.DAL.MyTunesDataAccess;
 import easv.mrs.DAL.db.SongDAO_DB;
-//import easv.mrs.DAL.db.MovieDAO_DB;
 
 import java.util.List;
 

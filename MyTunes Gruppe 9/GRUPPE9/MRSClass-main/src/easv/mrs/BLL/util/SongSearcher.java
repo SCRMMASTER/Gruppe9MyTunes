@@ -1,6 +1,5 @@
 package easv.mrs.BLL.util;
 
-//import easv.mrs.BE.Movie;
 import easv.mrs.BE.Song;
 
 import java.util.ArrayList;

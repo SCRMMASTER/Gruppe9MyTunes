@@ -1,7 +1,11 @@
 package easv.mrs.GUI.Controller;
 
 import easv.mrs.BE.Song;
+import easv.mrs.BLL.SongManager;
 import easv.mrs.GUI.Model.SongModel;
+import easv.mrs.DAL.db.SongDAO_DB;
+
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -12,51 +16,66 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 public class MyTunesViewController extends BaseController implements Initializable {
 
-
-    public TextField txtSongSearch;
-    public ListView<Song> lstSongs;
-    public Button editSongButton;
-    public ListView songsOnPlaylistView;
-
+    @FXML
+    public Text currentSongDisplay;
+    public TableView playlistsView;
+    public Slider volumeSlider;
+    @FXML
+    private TextField txtSongSearch,searchSongField,txtArtist,txtSongTitle,txtAlbum,txtAlbumTrack,txtYear,txtDuration,txtGenre,
+            txtFilepath;
+    @FXML
+    private Button editSongButton, closeAppButton,previousSongButton,playPauseButton,nextSongButton,toPlaylistButton,
+            newPlaylistButton,editPlaylistButton,deletePlaylistButton,songUpSort,songDownSort,deleteSongFromPlaylistButton,
+            newSongButton,deleteSongButton;
+    @FXML
+    private ListView songsOnPlaylistView;
+    @FXML
+    private ListView<Song> lstSongs;
     @FXML
     private TableView songsView;
-
     @FXML
-    private TextField txtArtist;
-
-    @FXML
-    private TextField txtSongTitle;
-
-    @FXML
-    private TextField txtAlbum;
-
-    @FXML
-    private TextField txtAlbumTrack;
-
-    @FXML
-    private TextField txtYear;
-
-    @FXML
-    private TextField txtDuration;
-
-    @FXML
-    private TextField txtGenre;
-    @FXML
-    private TextField txtFilepath;
-
     private SongModel songModel;
 
-    public MyTunesViewController()  {
 
+    private File directory;
+    private File[]files;
+
+    private ArrayList<File> songs;
+
+    private int songNumber;
+
+    private boolean isPlaying;
+
+    private Media media;
+    private MediaPlayer mediaPlayer;
+
+
+
+   //private String filePath = "lol.mp3";
+
+    //Media hit = new Media(new File(filePath).toURI().toString());
+    //MediaPlayer mediaPlayer = new MediaPlayer(hit);
+
+
+
+
+    public MyTunesViewController()  {
         try {
             songModel = new SongModel();
         } catch (Exception e) {
@@ -66,9 +85,33 @@ public class MyTunesViewController extends BaseController implements Initializab
     }
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        songs = new ArrayList<File>();
+        directory = new File("sangemappe");
+        files=directory.listFiles();
+
+        if (files != null){
+            for(File file : files){
+                songs.add(file);
+                System.out.println(file);
+            }
+        }
+
+        media = new Media(songs.get(songNumber).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+
+        currentSongDisplay.setText(songs.get(songNumber).getName());
+
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
+            }
+        });
+
     }
 
     @Override
@@ -134,7 +177,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         }
     }
 
-    public void handleEditNew(ActionEvent actionEvent) throws IOException {
+    public void handleEdit(ActionEvent actionEvent) throws IOException {
 
         Song selectedSong = lstSongs.getSelectionModel().getSelectedItem();
         songModel.setSelectedSong(selectedSong);
@@ -158,11 +201,127 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         // Show the dialog and wait until the user closes it
         dialogWindow.showAndWait();
-        /*
+
+
+    }
+
+        //Closes the application
+    public void handleCloseApplication(ActionEvent actionEvent)
+    {
+        Platform.exit();
+    }
+
+
+    public void handleSearchSong(ActionEvent actionEvent)
+    {
+
+    }
+
+    public void handlePreviousSong(ActionEvent actionEvent)
+    {
+        if(songNumber > 0)
+        {
+            songNumber--;
+            mediaPlayer.stop();
+
+            media = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            currentSongDisplay.setText(songs.get(songNumber).getName());
+
+            mediaPlayer.play();
+
+        }
+        else{
+            songNumber = songs.size() - 1;
+            mediaPlayer.stop();
+
+            media = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            currentSongDisplay.setText(songs.get(songNumber).getName());
+
+            mediaPlayer.play();
+
+        }
 
 
 
-         */
+    }
+
+        //Plays or pauses the track.
+    public void handlePlaySong(ActionEvent actionEvent)
+    {
+        if(isPlaying)
+        {
+            mediaPlayer.pause();
+            isPlaying = false;
+        }
+        else
+        {
+            mediaPlayer.play();
+            isPlaying = true;
+        }
+    }
+
+    public void handleNextSong(ActionEvent actionEvent)
+    {
+        if(songNumber < songs.size()-1)
+        {
+            songNumber++;
+            mediaPlayer.stop();
+
+            media = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            currentSongDisplay.setText(songs.get(songNumber).getName());
+
+            mediaPlayer.play();
+
+        }
+        else{
+            songNumber = 0;
+            mediaPlayer.stop();
+
+            media = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            currentSongDisplay.setText(songs.get(songNumber).getName());
+
+            mediaPlayer.play();
+
+        }
+
+    }
+
+    public void handleAddSongToPlaylist(ActionEvent actionEvent)
+    {
+
+    }
+
+    public void handleNewPlaylist(ActionEvent actionEvent)
+    {
+
+    }
+
+    public void handleEditPlaylist(ActionEvent actionEvent)
+    {
+
+    }
+
+    public void handleDeletePlaylist(ActionEvent actionEvent)
+    {
+
+    }
+
+    public void deleteSongOnPlaylist(ActionEvent actionEvent)
+    {
+
+    }
+
+    public void handleDeleteSong(ActionEvent actionEvent)
+    {
+
     }
 }
 
