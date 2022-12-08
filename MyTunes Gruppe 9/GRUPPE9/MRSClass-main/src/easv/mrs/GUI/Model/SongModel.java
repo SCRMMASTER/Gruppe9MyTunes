@@ -27,7 +27,6 @@ public class SongModel {
         songManager = new SongManager();
         songsToBeHeard = FXCollections.observableArrayList();
         songsToBeHeard.addAll(songManager.getAllSongs());
-        System.out.println("obslist:" + songsToBeHeard.size());
     }
 
     public ObservableList<Song> getObservableSongs() {

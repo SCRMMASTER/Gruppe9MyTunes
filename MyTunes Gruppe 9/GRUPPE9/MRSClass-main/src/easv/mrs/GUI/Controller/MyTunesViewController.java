@@ -1,6 +1,7 @@
 package easv.mrs.GUI.Controller;
 
 import easv.mrs.BE.Song;
+import easv.mrs.DAL.db.SongDAO_DB;
 import easv.mrs.GUI.Model.SongModel;
 
 import javafx.application.Platform;
@@ -30,7 +31,7 @@ public class MyTunesViewController extends BaseController implements Initializab
     @FXML
     public Text currentSongDisplay;
     @FXML
-    public TableView playlistsView;
+    public ListView songsOnPlaylist;
     public Slider volumeSlider;
     @FXML
     private TextField txtSongSearch,searchSongField,txtArtist,txtSongTitle,txtAlbum,txtAlbumTrack,txtYear,txtDuration,txtGenre,
@@ -40,11 +41,11 @@ public class MyTunesViewController extends BaseController implements Initializab
             newPlaylistButton,editPlaylistButton,deletePlaylistButton,songUpSort,songDownSort,deleteSongFromPlaylistButton,
             newSongButton,deleteSongButton;
     @FXML
-    private ListView songsOnPlaylistView;
+    private ListView allSongs;
     @FXML
     private ListView<Song> lstSongs;
     @FXML
-    private TableView songsView;
+    private ListView playlists;
     @FXML
     private SongModel songModel;
 
@@ -55,6 +56,9 @@ public class MyTunesViewController extends BaseController implements Initializab
     private boolean isPlaying;
     private Media media;
     private MediaPlayer mediaPlayer;
+
+    SongDAO_DB songDAO_db;
+
 
 
     public MyTunesViewController()  {
@@ -101,17 +105,16 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         editSongButton.setDisable(true);
 
-        songsOnPlaylistView.setItems(songModel.getObservableSongs());
-/*
-        txtSongSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
+        allSongs.setItems(songModel.getObservableSongs());
+
+        searchSongField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
             } catch (Exception e) {
                 displayError(e);
-                //e.printStackTrace();
             }
         });
-        */
+
 
 /*
         lstSongs.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -180,7 +183,6 @@ public class MyTunesViewController extends BaseController implements Initializab
         Scene scene = new Scene(pane);
         dialogWindow.setScene(scene);
 
-
         // Show the dialog and wait until the user closes it
         dialogWindow.showAndWait();
     }
@@ -191,8 +193,9 @@ public class MyTunesViewController extends BaseController implements Initializab
         Platform.exit();
     }
 
-    public void handleSearchSong(ActionEvent actionEvent)
-    {
+    public void handleSearchSong(ActionEvent actionEvent) throws Exception {
+        SongModel model = new SongModel();
+        model.getObservableSongs();
 
     }
 
