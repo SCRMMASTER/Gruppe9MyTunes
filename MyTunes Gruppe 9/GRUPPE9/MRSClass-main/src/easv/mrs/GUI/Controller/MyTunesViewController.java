@@ -1,9 +1,7 @@
 package easv.mrs.GUI.Controller;
 
 import easv.mrs.BE.Song;
-import easv.mrs.BLL.SongManager;
 import easv.mrs.GUI.Model.SongModel;
-import easv.mrs.DAL.db.SongDAO_DB;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -21,7 +19,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,11 +26,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 public class MyTunesViewController extends BaseController implements Initializable {
-
     @FXML
     public Text currentSongDisplay;
+    @FXML
     public TableView playlistsView;
     public Slider volumeSlider;
     @FXML
@@ -52,27 +48,13 @@ public class MyTunesViewController extends BaseController implements Initializab
     @FXML
     private SongModel songModel;
 
-
     private File directory;
     private File[]files;
-
     private ArrayList<File> songs;
-
     private int songNumber;
-
     private boolean isPlaying;
-
     private Media media;
     private MediaPlayer mediaPlayer;
-
-
-
-   //private String filePath = "lol.mp3";
-
-    //Media hit = new Media(new File(filePath).toURI().toString());
-    //MediaPlayer mediaPlayer = new MediaPlayer(hit);
-
-
 
 
     public MyTunesViewController()  {
@@ -80,21 +62,20 @@ public class MyTunesViewController extends BaseController implements Initializab
             songModel = new SongModel();
         } catch (Exception e) {
             displayError(e);
-            //e.printStackTrace();
         }
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         songs = new ArrayList<File>();
-        directory = new File("sangemappe");
+        directory = new File("songsFolder");
         files=directory.listFiles();
 
-        if (files != null){
-            for(File file : files){
+        if (files != null)
+        {
+            for(File file : files)
+            {
                 songs.add(file);
                 System.out.println(file);
             }
@@ -111,7 +92,6 @@ public class MyTunesViewController extends BaseController implements Initializab
                 mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
             }
         });
-
     }
 
     @Override
@@ -150,8 +130,6 @@ public class MyTunesViewController extends BaseController implements Initializab
         */
     }
 
-
-
     private void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -160,8 +138,8 @@ public class MyTunesViewController extends BaseController implements Initializab
         alert.showAndWait();
     }
 
-
-    public void handleAddNewSongNew(ActionEvent actionEvent) {
+    public void handleAddNewSongNew(ActionEvent actionEvent)
+    {
 
         String artist = txtArtist.getText();
         String songtitle = txtSongTitle.getText();
@@ -171,13 +149,17 @@ public class MyTunesViewController extends BaseController implements Initializab
         float duration = Float.parseFloat(txtDuration.getText());
         String filepath = txtFilepath.getText();
 
-        try {
+        try
+        {
             songModel.createNewSong(artist, songtitle, album, year, genre, duration, filepath);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
         }
     }
 
-    public void handleEdit(ActionEvent actionEvent) throws IOException {
+    public void handleEdit(ActionEvent actionEvent) throws IOException
+    {
 
         Song selectedSong = lstSongs.getSelectionModel().getSelectedItem();
         songModel.setSelectedSong(selectedSong);
@@ -201,8 +183,6 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         // Show the dialog and wait until the user closes it
         dialogWindow.showAndWait();
-
-
     }
 
         //Closes the application
@@ -210,7 +190,6 @@ public class MyTunesViewController extends BaseController implements Initializab
     {
         Platform.exit();
     }
-
 
     public void handleSearchSong(ActionEvent actionEvent)
     {
@@ -230,7 +209,6 @@ public class MyTunesViewController extends BaseController implements Initializab
             currentSongDisplay.setText(songs.get(songNumber).getName());
 
             mediaPlayer.play();
-
         }
         else{
             songNumber = songs.size() - 1;
@@ -242,11 +220,7 @@ public class MyTunesViewController extends BaseController implements Initializab
             currentSongDisplay.setText(songs.get(songNumber).getName());
 
             mediaPlayer.play();
-
         }
-
-
-
     }
 
         //Plays or pauses the track.
@@ -277,9 +251,9 @@ public class MyTunesViewController extends BaseController implements Initializab
             currentSongDisplay.setText(songs.get(songNumber).getName());
 
             mediaPlayer.play();
-
         }
-        else{
+        else
+        {
             songNumber = 0;
             mediaPlayer.stop();
 
@@ -289,9 +263,7 @@ public class MyTunesViewController extends BaseController implements Initializab
             currentSongDisplay.setText(songs.get(songNumber).getName());
 
             mediaPlayer.play();
-
         }
-
     }
 
     public void handleAddSongToPlaylist(ActionEvent actionEvent)
