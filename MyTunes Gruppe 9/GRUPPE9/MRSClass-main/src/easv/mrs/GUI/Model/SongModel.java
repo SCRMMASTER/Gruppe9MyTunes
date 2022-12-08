@@ -10,8 +10,8 @@ import java.util.List;
 // Project imports
 
 
-/**
- * @author smsj
+/*
+ *@author Magnus, Johnni & Jesper
  */
 public class SongModel {
 

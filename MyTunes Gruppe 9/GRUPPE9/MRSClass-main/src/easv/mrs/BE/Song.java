@@ -1,5 +1,8 @@
 package easv.mrs.BE;
 
+/*
+ *@author Magnus, Johnni & Jesper
+*/
 public class Song {
 
     private int id;
