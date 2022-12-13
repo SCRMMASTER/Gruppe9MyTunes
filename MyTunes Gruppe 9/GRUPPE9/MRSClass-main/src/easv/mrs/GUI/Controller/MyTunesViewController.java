@@ -88,6 +88,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
+
         currentSongDisplay.setText(songs.get(songNumber).getName());
 
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -130,7 +131,7 @@ public class MyTunesViewController extends BaseController implements Initializab
             else
                 editSongButton.setDisable(true);
         });
-        */
+*/
     }
 
     private void displayError(Throwable t)
@@ -141,24 +142,26 @@ public class MyTunesViewController extends BaseController implements Initializab
         alert.showAndWait();
     }
 
-    public void handleAddNewSongNew(ActionEvent actionEvent)
-    {
+    public void handleAddNewSongNew(ActionEvent actionEvent) throws IOException {
 
-        String artist = txtArtist.getText();
-        String songtitle = txtSongTitle.getText();
-        String album = txtAlbum.getText();
-        int year = Integer.parseInt(txtYear.getText());
-        String genre = txtGenre.getText();
-        float duration = Float.parseFloat(txtDuration.getText());
-        String filepath = txtFilepath.getText();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/NewSongView.fxml"));
+        AnchorPane pane = (AnchorPane) loader.load();
 
-        try
-        {
-            songModel.createNewSong(artist, songtitle, album, year, genre, duration, filepath);
-        }
-        catch (Exception e)
-        {
-        }
+        NewSongController controller = loader.getController();
+        controller.setModel(super.getModel());
+        controller.setup();
+
+        // Create the dialog Stage.
+        Stage dialogWindow = new Stage();
+        dialogWindow.setTitle("New Playlist");
+        dialogWindow.initModality(Modality.WINDOW_MODAL);
+        dialogWindow.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+        Scene scene = new Scene(pane);
+        dialogWindow.setScene(scene);
+
+        // Show the dialog and wait until the user closes it
+        dialogWindow.showAndWait();
     }
 
     public void handleEdit(ActionEvent actionEvent) throws IOException
@@ -272,15 +275,51 @@ public class MyTunesViewController extends BaseController implements Initializab
     public void handleAddSongToPlaylist(ActionEvent actionEvent)
     {
 
-    }
 
-    public void handleNewPlaylist(ActionEvent actionEvent)
-    {
 
     }
 
-    public void handleEditPlaylist(ActionEvent actionEvent)
-    {
+    public void handleNewPlaylist(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/NewPlaylistView.fxml"));
+        AnchorPane pane = (AnchorPane) loader.load();
+
+        NewPlaylistController controller = loader.getController();
+        controller.setModel(super.getModel());
+        controller.setup();
+
+        // Create the dialog Stage.
+        Stage dialogWindow = new Stage();
+        dialogWindow.setTitle("New Playlist");
+        dialogWindow.initModality(Modality.WINDOW_MODAL);
+        dialogWindow.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+        Scene scene = new Scene(pane);
+        dialogWindow.setScene(scene);
+
+        // Show the dialog and wait until the user closes it
+        dialogWindow.showAndWait();
+
+    }
+
+    public void handleEditPlaylist(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/PlaylistRenameView.fxml"));
+        AnchorPane pane = (AnchorPane) loader.load();
+
+        PlaylistNameEditController controller = loader.getController();
+        controller.setModel(super.getModel());
+        controller.setup();
+
+        // Create the dialog Stage.
+        Stage dialogWindow = new Stage();
+        dialogWindow.setTitle("Rename Playlist");
+        dialogWindow.initModality(Modality.WINDOW_MODAL);
+        dialogWindow.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+        Scene scene = new Scene(pane);
+        dialogWindow.setScene(scene);
+
+        // Show the dialog and wait until the user closes it
+        dialogWindow.showAndWait();
 
     }
 
