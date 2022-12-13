@@ -1,10 +1,5 @@
 package easv.mrs.BE;
-
-/*
- *@author Magnus, Johnni & Jesper
-*/
 public class Song {
-
     private int id;
     private String artist;
     private String songtitle;
@@ -27,7 +22,6 @@ public class Song {
         this.genre = genre;
         this.duration = duration;
         this.filepath = filepath;
-
     }
 
     public Song(int id) {
@@ -103,5 +97,4 @@ public class Song {
     public String toString() {
         return id + ": " + artist + ": " + songtitle + ": " + album + ": " + year + ": " + genre + ": " + duration + ": " + filepath;
     }
-
 }

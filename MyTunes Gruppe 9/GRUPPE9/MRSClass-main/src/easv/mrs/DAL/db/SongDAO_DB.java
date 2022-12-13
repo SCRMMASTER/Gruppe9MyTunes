@@ -2,24 +2,21 @@ package easv.mrs.DAL.db;
 
 import easv.mrs.BE.Song;
 import easv.mrs.DAL.MyTunesDataAccess;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- *@author Magnus, Johnni & Jesper
-*/
-
 public class SongDAO_DB implements MyTunesDataAccess {
     private MyDatabaseConnector databaseConnector;
 
-    public SongDAO_DB() {
+    public SongDAO_DB()
+    {
         databaseConnector = new MyDatabaseConnector();
     }
 
     //Get all Songs
-    public List<Song> getAllSongs() throws Exception {
+    public List<Song> getAllSongs() throws Exception
+    {
 
         ArrayList<Song> allSongs = new ArrayList<>();
 
@@ -28,12 +25,11 @@ public class SongDAO_DB implements MyTunesDataAccess {
         {
             String sql = "SELECT * FROM Songs;";
 
-
             ResultSet rs = stmt.executeQuery(sql);
 
             // Loop through all the rows of the database
-            while (rs.next()) {
-
+            while (rs.next())
+            {
                 //Map the Database roes to the Song object
 
                 int id = rs.getInt("ID");
@@ -62,14 +58,13 @@ public class SongDAO_DB implements MyTunesDataAccess {
     }
 
     //Create a new Song object.
-    public Song createSong(String artist, String songtitle, String album, int year, String genre, float duration, String filepath) throws Exception {
-
+    public Song createSong(String artist, String songtitle, String album, int year, String genre, float duration, String filepath) throws Exception
+    {
         // Sql Command
-
-
         String sql = "INSERT INTO Songs (artist,songtitle, album, year, genre, duration, filepath) VALUES (?,?,?,?,?,?,?);";
 
-        try (Connection conn = databaseConnector.getConnection()) {
+        try (Connection conn = databaseConnector.getConnection())
+        {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Bind the parameters
@@ -106,8 +101,8 @@ public class SongDAO_DB implements MyTunesDataAccess {
     }
 
     //Update a Song
-    public void updateSong(Song song) throws Exception {
-
+    public void updateSong(Song song) throws Exception
+    {
         try (Connection conn = databaseConnector.getConnection()) {
 
             String sql = "UPDATE Songs SET artist = ?, songtitle = ?, album = ?, Year = ?, genre = ?, duration = ?, filepath =?, WHERE Id = ?";
@@ -135,7 +130,8 @@ public class SongDAO_DB implements MyTunesDataAccess {
 
     //Delete selected song
 
-    public void deleteSong(Song selectedSong) throws Exception {
+    public void deleteSong(Song selectedSong) throws Exception
+    {
         try (Connection conn = databaseConnector.getConnection()){
 
             //SQL Command
@@ -155,10 +151,9 @@ public class SongDAO_DB implements MyTunesDataAccess {
         }
     }
 
-    public List<Song> searchSongs(String query) throws Exception {
-
+    public List<Song> searchSongs(String query) throws Exception
+    {
         //TODO Do this
         throw new UnsupportedOperationException();
     }
-
 }

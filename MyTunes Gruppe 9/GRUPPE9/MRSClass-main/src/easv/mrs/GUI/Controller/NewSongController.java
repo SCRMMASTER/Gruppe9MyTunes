@@ -13,8 +13,6 @@ public class NewSongController extends BaseController{
     public Button addSongButton;
     private SongModel model;
 
-
-
     @Override
     public void setup()
     {
@@ -23,8 +21,6 @@ public class NewSongController extends BaseController{
 
     public void handleAddSong(ActionEvent actionEvent)
     {
-
-
 
     }
 }

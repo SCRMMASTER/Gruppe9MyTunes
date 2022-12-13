@@ -18,17 +18,12 @@ public class PlaylistNameEditController extends BaseController {
     public void renamePlaylist(ActionEvent actionEvent)
     {
 
-
     }
 
-
     @Override
-    public void setup() {
-
+    public void setup()
+    {
         model = getModel().getSongModel();
-
         renamePlaylistTextfield.setText("new Playlist name");
-
-
     }
 }

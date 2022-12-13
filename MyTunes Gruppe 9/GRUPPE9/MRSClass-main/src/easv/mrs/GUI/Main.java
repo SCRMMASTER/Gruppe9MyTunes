@@ -8,12 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/*jkf
-*@author Magnus, Johnni & Jesper
-*/
-
 public class Main extends Application {
-//Launch the Application
     @Override
     public void start(Stage primaryStage) throws Exception{
 

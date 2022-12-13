@@ -1,11 +1,6 @@
 package easv.mrs.BE;
-
-/*
- *@author Magnus, Johnni & Jesper
-*/
 public class Playlist {
 
-    // Declare variables for the Playlist
     private int tracknbr;
 
     private String artist;
@@ -14,16 +9,13 @@ public class Playlist {
 
     private float duration;
 
-    public Playlist(int tracknbr, String artist, String songtitle, float duration) {
-
+    public Playlist(int tracknbr, String artist, String songtitle, float duration)
+    {
         this.tracknbr = tracknbr;
         this.artist = artist;
         this.songtitle = songtitle;
         this.duration = duration;
-
     }
-
-    // Getters and Setters for the Playlist.
 
     public int getTracknbr() {
         return tracknbr;
@@ -56,6 +48,4 @@ public class Playlist {
     public void setDuration(float duration) {
         this.duration = duration;
     }
-
-
 }

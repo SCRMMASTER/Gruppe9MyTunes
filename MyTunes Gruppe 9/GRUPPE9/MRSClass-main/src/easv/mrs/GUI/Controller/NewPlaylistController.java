@@ -18,13 +18,8 @@ public class NewPlaylistController extends BaseController{
     public void setup()
     {
         model = getModel().getSongModel();
-
         newPlaylistTextfield.setText("Name...");
-
     }
-
-
-
 
     public void handleNewPlaylist(ActionEvent actionEvent)
     {

@@ -20,8 +20,8 @@ public class SongDetailsViewController extends BaseController {
      * @param actionEvent
      * @throws Exception
      */
-    public void handleUpdate(ActionEvent actionEvent) throws Exception {
-
+    public void handleUpdate(ActionEvent actionEvent) throws Exception
+    {
         String updatedartist = txtArtist.getText();
         String updatedsongtitle = txtSongTitle.getText();
         String updatedalbum = txtAlbum.getText();
@@ -39,10 +39,9 @@ public class SongDetailsViewController extends BaseController {
     }
 
     @Override
-    public void setup() {
-
+    public void setup()
+    {
         model = getModel().getSongModel();
-
         txtArtist.setText(model.getSelectedSong().getArtist());
         txtSongTitle.setText(String.valueOf(model.getSelectedSong().getSongtitle()));
     }
