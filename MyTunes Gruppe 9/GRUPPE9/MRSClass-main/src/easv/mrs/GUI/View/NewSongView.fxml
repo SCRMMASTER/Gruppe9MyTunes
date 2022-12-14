@@ -4,15 +4,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="273.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.mrs.GUI.Controller.NewSongController">
+<AnchorPane prefHeight="205.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.mrs.GUI.Controller.NewSongController">
    <children>
-      <TextField fx:id="artistTextfield" layoutX="76.0" layoutY="47.0" promptText="Artist.." />
-      <TextField fx:id="songTextfield" layoutX="76.0" layoutY="79.0" promptText="Song Title..." />
-      <TextField fx:id="albumTextfield" layoutX="76.0" layoutY="112.0" promptText="Album..." />
-      <TextField fx:id="yearTextfield" layoutX="76.0" layoutY="145.0" promptText="Year..." />
-      <TextField fx:id="gengreTextfield" layoutX="76.0" layoutY="179.0" promptText="Gengre..." />
-      <TextField fx:id="filePathTextfield" layoutX="76.0" layoutY="210.0" promptText="Filepath..." />
-      <Button fx:id="addSongButton" layoutX="356.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleAddSong" prefHeight="108.0" prefWidth="161.0" text="Add Song" />
+      <TextField fx:id="artistTextfield" layoutX="27.0" layoutY="14.0" promptText="Artist.." />
+      <TextField fx:id="songTextfield" layoutX="27.0" layoutY="43.0" promptText="Song Title..." />
+      <TextField fx:id="albumTextfield" layoutX="27.0" layoutY="74.0" promptText="Album..." />
+      <TextField fx:id="yearTextfield" layoutX="27.0" layoutY="108.0" promptText="Year..." />
+      <TextField fx:id="gengreTextfield" layoutX="27.0" layoutY="138.0" promptText="Gengre..." />
+      <TextField fx:id="filePathTextfield" layoutX="27.0" layoutY="169.0" promptText="Filepath..." />
+      <Button fx:id="addSongButton" layoutX="246.0" layoutY="49.0" mnemonicParsing="false" onAction="#handleAddSong" prefHeight="108.0" prefWidth="161.0" text="Add Song" />
    </children>
 </AnchorPane>

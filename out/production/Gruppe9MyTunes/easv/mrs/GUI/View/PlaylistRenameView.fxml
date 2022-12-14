@@ -3,12 +3,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.mrs.GUI.Controller.PlaylistNameEditController">
+<AnchorPane prefHeight="55.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.mrs.GUI.Controller.PlaylistNameEditController">
    <children>
-      <TextField fx:id="renamePlaylistTextfield" layoutX="71.0" layoutY="63.0" prefHeight="26.0" prefWidth="209.0" />
-      <Button fx:id="executeRenameButton" layoutX="292.0" layoutY="63.0" mnemonicParsing="false" onAction="#renamePlaylist" text="Rename" />
-      <Text layoutX="71.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Playlist Name" />
+      <TextField fx:id="renamePlaylistTextfield" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="209.0" promptText="Playlist name..." />
+      <Button fx:id="executeRenameButton" layoutX="230.0" layoutY="15.0" mnemonicParsing="false" onAction="#renamePlaylist" text="Rename" />
    </children>
 </AnchorPane>

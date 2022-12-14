@@ -146,7 +146,7 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         // Create the dialog Stage.
         Stage dialogWindow = new Stage();
-        dialogWindow.setTitle("New Playlist");
+        dialogWindow.setTitle("New Song");
         dialogWindow.initModality(Modality.WINDOW_MODAL);
         dialogWindow.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
         Scene scene = new Scene(pane);
@@ -171,7 +171,7 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         // Create the dialog Stage.
         Stage dialogWindow = new Stage();
-        dialogWindow.setTitle("Edit Song");
+        dialogWindow.setTitle("Edit Song Details");
         dialogWindow.initModality(Modality.WINDOW_MODAL);
         dialogWindow.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
         Scene scene = new Scene(pane);
