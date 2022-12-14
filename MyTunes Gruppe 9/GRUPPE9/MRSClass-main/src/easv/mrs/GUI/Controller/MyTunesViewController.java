@@ -21,13 +21,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.WriteAbortedException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MyTunesViewController extends BaseController implements Initializable {
     @FXML
-    private TextField txtSongSearch,searchSongField,txtArtist,txtSongTitle,txtAlbum,txtAlbumTrack,txtYear,txtDuration,txtGenre,
+    private TextField txtSongSearch,searchSongField,txtArtist,txtSongTitle,txtAlbum,txtAlbumTrack,txtYear,txtGenre,
             txtFilepath;
     @FXML
     private Button editSongButton, closeAppButton,previousSongButton,playPauseButton,nextSongButton,toPlaylistButton,
@@ -40,8 +42,8 @@ public class MyTunesViewController extends BaseController implements Initializab
     public Slider volumeSlider;
     @FXML
     private ListView allSongs, playlists;
-    @FXML
-    private ListView<Song> lstSongs;
+    //@FXML
+   // private ListView<Song> lstSongs;
     @FXML
     private SongModel songModel;
     private File directory;
@@ -98,7 +100,7 @@ public class MyTunesViewController extends BaseController implements Initializab
     {
         songModel = getModel().getSongModel();
 
-        editSongButton.setDisable(true);
+        editSongButton.setDisable(false);
 
         allSongs.setItems(songModel.getObservableSongs());
 
@@ -134,6 +136,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         alert.showAndWait();
     }
 
+
     public void handleAddNewSongNew(ActionEvent actionEvent) throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
@@ -156,29 +159,33 @@ public class MyTunesViewController extends BaseController implements Initializab
         dialogWindow.showAndWait();
     }
 
-    public void handleEdit(ActionEvent actionEvent) throws IOException
-    {
-        Song selectedSong = lstSongs.getSelectionModel().getSelectedItem();
+    public void handleEdit(ActionEvent actionEvent) throws IOException {
+        Song selectedSong = (Song) allSongs.getSelectionModel().getSelectedItem();
         songModel.setSelectedSong(selectedSong);
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/SongDetailsView.fxml"));
-        AnchorPane pane = (AnchorPane) loader.load();
+        if (selectedSong != null) {
 
-        SongDetailsViewController controller = loader.getController();
-        controller.setModel(super.getModel());
-        controller.setup();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/SongDetailsView.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
 
-        // Create the dialog Stage.
-        Stage dialogWindow = new Stage();
-        dialogWindow.setTitle("Edit Song Details");
-        dialogWindow.initModality(Modality.WINDOW_MODAL);
-        dialogWindow.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
-        Scene scene = new Scene(pane);
-        dialogWindow.setScene(scene);
+            SongDetailsViewController controller = loader.getController();
+            controller.setModel(super.getModel());
+            controller.setup();
 
-        // Show the dialog and wait until the user closes it
-        dialogWindow.showAndWait();
+            // Create the dialog Stage.
+            Stage dialogWindow = new Stage();
+            dialogWindow.setTitle("Edit Song Details");
+            dialogWindow.initModality(Modality.WINDOW_MODAL);
+            dialogWindow.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+            Scene scene = new Scene(pane);
+            dialogWindow.setScene(scene);
+
+            // Show the dialog and wait until the user closes it
+            dialogWindow.showAndWait();
+
+        }
+
     }
 
     public void handleCloseApplication(ActionEvent actionEvent)

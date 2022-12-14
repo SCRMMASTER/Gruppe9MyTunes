@@ -27,8 +27,8 @@ public class PlaylistManager {
         return searchResult;
     }
 
-    public Playlist createNewPlaylist(String artist, String songtitle, float duration, String filepath) throws Exception {
-        return playlistDAO.createPlaylist(artist, songtitle, duration, filepath);
+    public Playlist createNewPlaylist(String artist, String songtitle, String filepath) throws Exception {
+        return playlistDAO.createPlaylist(artist, songtitle, filepath);
     }
 
     public void updatePlaylist(Playlist updatedPlaylist) throws Exception {

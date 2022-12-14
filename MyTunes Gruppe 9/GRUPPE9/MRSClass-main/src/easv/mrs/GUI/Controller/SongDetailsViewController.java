@@ -5,14 +5,17 @@ import easv.mrs.GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SongDetailsViewController extends BaseController {
 
     @FXML
-    private TextField txtArtist, txtSongTitle, txtAlbum, txtYear, txtGenre, txtDuration, txtFilepath;
-
+    public Button btnUpdate;
+    @FXML
+    private TextField txtArtist, txtSongTitle, txtAlbum, txtYear, txtGenre, txtFilepath;
+    @FXML
     private SongModel model;
 
     /**
@@ -27,10 +30,10 @@ public class SongDetailsViewController extends BaseController {
         String updatedalbum = txtAlbum.getText();
         int updatedyear = Integer.parseInt(txtYear.getText());
         String updatedgenre = txtGenre.getText();
-        float updatedduration = Float.parseFloat(txtDuration.getText());
+        //float updatedduration = Float.parseFloat(txtDuration.getText());
         String updatedfilepath = txtFilepath.getText();
 
-        Song updatedSong = new Song(model.getSelectedSong().getId(), updatedartist, updatedsongtitle, updatedalbum, updatedyear, updatedgenre, updatedduration, updatedfilepath);
+        Song updatedSong = new Song(model.getSelectedSong().getId(), updatedartist, updatedsongtitle, updatedalbum, updatedyear, updatedgenre, updatedfilepath);
 
         model.updateSong(updatedSong);
 

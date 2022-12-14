@@ -34,10 +34,10 @@ public class SongModel {
         songsToBeHeard.addAll(searchResults);
     }
 
-    public void createNewSong(String artist, String songtitle, String album, int year, String genre, float duration, String filepath) throws Exception
+    public void createNewSong(String artist, String songtitle, String album, int year, String genre, String filepath) throws Exception
     {
         // Create movie in data storage
-        Song s = songManager.createNewSong(artist, songtitle, album, year, genre, duration, filepath);
+        Song s = songManager.createNewSong(artist, songtitle, album, year, genre, filepath);
 
         // Add movie to observable list (gui)
         songsToBeHeard.add(s);

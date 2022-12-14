@@ -12,19 +12,16 @@ public class Playlist {
 
     private String songtitle;
 
-    private float duration;
-
     private int id;
 
     private String filepath;
 
 
-    public Playlist(int tracknbr, String artist, String songtitle, float duration, int id, String filepath) {
+    public Playlist(int tracknbr, String artist, String songtitle,  int id, String filepath) {
 
         this.tracknbr = tracknbr;
         this.artist = artist;
         this.songtitle = songtitle;
-        this.duration = duration;
         this.id = id;
         this.filepath = filepath;
 
@@ -56,13 +53,6 @@ public class Playlist {
         this.songtitle = songtitle;
     }
 
-    public float getDuration() {
-        return duration;
-    }
-
-    public void setDuration(float duration) {
-        this.duration = duration;
-    }
 
     public int getId(){
         return id;

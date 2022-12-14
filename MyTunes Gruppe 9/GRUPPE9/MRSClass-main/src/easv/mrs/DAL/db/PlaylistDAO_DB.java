@@ -40,11 +40,11 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
                 int tracknbr = rs.getInt("TrackNbr");
                 String artist = rs.getString("Artist");
                 String songtitle = rs.getString("SongTitle");
-                float duration = rs.getFloat("Duration");
+                //float duration = rs.getFloat("Duration");
                 int id = rs.getInt("ID");
                 String filepath = rs.getString("Filepath");
 
-                Playlist playlist = new Playlist(tracknbr, artist, songtitle, duration, id, filepath);
+                Playlist playlist = new Playlist(tracknbr, artist, songtitle, id, filepath);
                 allSongsPl.add(playlist);
             }
 
@@ -61,12 +61,12 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
     }
 
     @Override
-    public Playlist createPlaylist(String artist, String songtitle, float duration, String filepath) throws Exception {
+    public Playlist createPlaylist(String artist, String songtitle, String filepath) throws Exception {
         return null;
     }
 
     //Create a new Playlist object.
-    public Playlist createPlaylist(String artist, String songtitle, float duration, String filepath, int id) throws Exception {
+    public Playlist createPlaylist(String artist, String songtitle, String filepath, int id) throws Exception {
 
         // Sql Command
 
@@ -79,9 +79,9 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             // Bind the parameters
             stmt.setString(1, artist);
             stmt.setString(2, songtitle);
-            stmt.setString(3, String.valueOf(duration));
-            stmt.setString(4, filepath);
-            stmt.setString(5, String.valueOf(id));
+           // stmt.setString(3, String.valueOf(duration));
+            stmt.setString(3, filepath);
+            stmt.setString(4, String.valueOf(id));
 
 
             // Run the SQL statement
@@ -96,7 +96,7 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             }
 
             // Create playlist object and send up the layers
-            Playlist playlist = new Playlist(tracknbr, artist, songtitle, duration, id, filepath);
+            Playlist playlist = new Playlist(tracknbr, artist, songtitle, id,filepath);
             return playlist;
         }
         catch (SQLException ex)
@@ -112,14 +112,14 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
         try (Connection conn = databaseConnector.getConnection()) {
 
-            String sql = "UPDATE Playlist SET artist = ?, songtitle = ?, duration = ?, filepath =?, WHERE tracknbr = ?";
+            String sql = "UPDATE Playlist SET artist = ?, songtitle = ?, filepath =?, WHERE tracknbr = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             // Bind the parameters
             stmt.setString(1, playlist.getArtist());
             stmt.setString( 2, playlist.getSongtitle());
-            stmt.setFloat(3, playlist.getDuration());
+            //stmt.setFloat(3, playlist.getDuration());
             stmt.setString(4, playlist.getFilepath());
 
             //Run the SQL Command

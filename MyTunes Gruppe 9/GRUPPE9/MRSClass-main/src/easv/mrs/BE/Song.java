@@ -8,11 +8,11 @@ public class Song {
     private int year;
     private String genre;
 
-    private float duration;
+    //private float duration;
 
     private String filepath;
 
-    public Song(int id, String artist, String songtitle, String album, int year, String genre, float duration, String filepath) {
+    public Song(int id, String artist, String songtitle, String album, int year, String genre, String filepath) {
 
         this.id = id;
         this.artist = artist;
@@ -20,7 +20,7 @@ public class Song {
         this.album = album;
         this.year = year;
         this.genre = genre;
-        this.duration = duration;
+        //this.duration = duration;
         this.filepath = filepath;
     }
 
@@ -80,12 +80,12 @@ public class Song {
         this.genre = genre;
     }
 
-    public float getDuration() {
-        return duration;
-    }
-    public void setDuration(float duration) {
-        this.duration = duration;
-    }
+   // public float getDuration() {
+        //return duration;
+    //}
+   // public void setDuration(float duration) {
+        //this.duration = duration;
+    //}
     public String getFilepath(){
         return filepath;
     }
@@ -95,6 +95,6 @@ public class Song {
 
     @Override
     public String toString() {
-        return id + ": " + artist + ": " + songtitle + ": " + album + ": " + year + ": " + genre + ": " + duration + ": " + filepath;
+        return id + ": " + artist + ": " + songtitle + ": " + album + ": " + year + ": " + genre + ": " + filepath;
     }
 }
