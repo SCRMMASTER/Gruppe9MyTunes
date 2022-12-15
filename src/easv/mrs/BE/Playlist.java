@@ -6,53 +6,40 @@ package easv.mrs.BE;
 public class Playlist {
 
     // Declare variables for the Playlist
-    private int tracknbr;
+    private int nbrOfTracks;
 
-    private String artist;
-
-    private String songtitle;
+    private String playlistTitle;
 
     private int id;
 
-    private String filepath;
 
 
-    public Playlist(int tracknbr, String artist, String songtitle,  int id, String filepath) {
+    public Playlist(int nbrOfTracks, String playlistTitle, int id) {
 
-        this.tracknbr = tracknbr;
-        this.artist = artist;
-        this.songtitle = songtitle;
+        this.nbrOfTracks = nbrOfTracks;
+        this.playlistTitle = playlistTitle;
         this.id = id;
-        this.filepath = filepath;
+
 
     }
 
     // Getters and Setters for the Playlist.
 
-    public int getTracknbr() {
-        return tracknbr;
+    public int getNbrOfTracks() {
+        return nbrOfTracks;
     }
 
-    public void setTracknbr(int tracknbr) {
-        this.tracknbr = tracknbr;
+    public void setNbrOfTracks(int nbrOfTracks) {
+        this.nbrOfTracks = nbrOfTracks;
     }
 
-    public String getArtist() {
-        return artist;
+    public String getPlaylistTitle() {
+        return playlistTitle;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
+    public void setPlaylistTitle(String playlistTitle) {
+        this.playlistTitle = playlistTitle;
     }
-
-    public String getSongtitle() {
-        return songtitle;
-    }
-
-    public void setSongtitle(String songtitle) {
-        this.songtitle = songtitle;
-    }
-
 
     public int getId(){
         return id;
@@ -60,11 +47,10 @@ public class Playlist {
     public void setId(int id){
         this.id = id;
     }
-    public String getFilepath(){
-        return filepath;
+
+    @Override
+    public String toString() {
+        return id + ": " + nbrOfTracks + ": " + playlistTitle + ": ";
     }
 
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
-    }
 }

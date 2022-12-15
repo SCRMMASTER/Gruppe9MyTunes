@@ -17,7 +17,6 @@ public class SongDAO_DB implements MyTunesDataAccess {
     //Get all Songs
     public List<Song> getAllSongs() throws Exception
     {
-
         ArrayList<Song> allSongs = new ArrayList<>();
 
         try (Connection conn = databaseConnector.getConnection();

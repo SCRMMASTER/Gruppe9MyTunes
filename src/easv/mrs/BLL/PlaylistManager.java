@@ -11,14 +11,14 @@ import java.util.List;
 public class PlaylistManager {
     private PlaylistSearcher playlistSearcher = new PlaylistSearcher();
 
-    private MyTunesPlaylistAccess playlistDAO;
+    private MyTunesPlaylistAccess playlistDAO_DB;
 
     public PlaylistManager() {
-        playlistDAO = new PlaylistDAO_DB();
+        playlistDAO_DB = new PlaylistDAO_DB();
     }
 
     public List<Playlist> getAllSongsPl() throws Exception {
-        return playlistDAO.getAllSongsPl();
+        return playlistDAO_DB.getAllSongsPl();
     }
 
     public List<Playlist> searchSongsPl(String query) throws Exception {
@@ -27,11 +27,11 @@ public class PlaylistManager {
         return searchResult;
     }
 
-    public Playlist createNewPlaylist(String artist, String songtitle, String filepath) throws Exception {
-        return playlistDAO.createPlaylist(artist, songtitle, filepath);
+    public Playlist createNewPlaylist(int nbrOfTracks, String playlistTitle) throws Exception {
+        return playlistDAO_DB.createPlaylist(nbrOfTracks, playlistTitle);
     }
 
     public void updatePlaylist(Playlist updatedPlaylist) throws Exception {
-        playlistDAO.updatePlaylist(updatedPlaylist);
+        playlistDAO_DB.updatePlaylist(updatedPlaylist);
     }
 }

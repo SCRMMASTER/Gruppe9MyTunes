@@ -20,10 +20,10 @@ public class PlaylistSearcher {
         return searchResult;
     }
     private boolean compareToPlaylistArtist(String query, Playlist playlist) {
-        return playlist.getArtist().toLowerCase().contains(query.toLowerCase());
+        return playlist.getPlaylistTitle().toLowerCase().contains(query.toLowerCase());
     }
 
     private boolean compareToPlaylistSongTitle(String query, Playlist playlist) {
-        return playlist.getSongtitle().toLowerCase().contains(query.toLowerCase());
+        return playlist.getPlaylistTitle().toLowerCase().contains(query.toLowerCase());
     }
 }

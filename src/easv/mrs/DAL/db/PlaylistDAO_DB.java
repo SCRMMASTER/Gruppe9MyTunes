@@ -37,14 +37,12 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
                 //Map the Database roes to the Playlist object
 
-                int tracknbr = rs.getInt("TrackNbr");
-                String artist = rs.getString("Artist");
-                String songtitle = rs.getString("SongTitle");
-                //float duration = rs.getFloat("Duration");
+                int nbrOfTracks = rs.getInt("nbrOfTracks");
+                String playlistTitle = rs.getString("playlistTitle");
                 int id = rs.getInt("ID");
-                String filepath = rs.getString("Filepath");
+                //String filepath = rs.getString("Filepath");
 
-                Playlist playlist = new Playlist(tracknbr, artist, songtitle, id, filepath);
+                Playlist playlist = new Playlist(nbrOfTracks, playlistTitle, id);
                 allSongsPl.add(playlist);
             }
 
@@ -60,13 +58,14 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
         }
     }
 
+
     @Override
-    public Playlist createPlaylist(String artist, String songtitle, String filepath) throws Exception {
+    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle) throws Exception {
         return null;
     }
 
     //Create a new Playlist object.
-    public Playlist createPlaylist(String artist, String songtitle, String filepath, int id) throws Exception {
+    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle, int id) throws Exception {
 
         // Sql Command
 
@@ -77,10 +76,8 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Bind the parameters
-            stmt.setString(1, artist);
-            stmt.setString(2, songtitle);
-           // stmt.setString(3, String.valueOf(duration));
-            stmt.setString(3, filepath);
+            stmt.setString(1, String.valueOf(nbrOfTracks));
+            stmt.setString(2, playlistTitle);
             stmt.setString(4, String.valueOf(id));
 
 
@@ -96,7 +93,7 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             }
 
             // Create playlist object and send up the layers
-            Playlist playlist = new Playlist(tracknbr, artist, songtitle, id,filepath);
+            Playlist playlist = new Playlist(nbrOfTracks, playlistTitle, id);
             return playlist;
         }
         catch (SQLException ex)
@@ -112,15 +109,17 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
         try (Connection conn = databaseConnector.getConnection()) {
 
-            String sql = "UPDATE Playlist SET artist = ?, songtitle = ?, filepath =?, WHERE tracknbr = ?";
+            String sql = "UPDATE Playlist SET nbrOfTracks = ?, playlistTitle = ?";
+
+            //den gamle SQL statement
+            //String sql = "UPDATE Playlist SET artist = ?, songtitle = ?, filepath =?, WHERE tracknbr = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             // Bind the parameters
-            stmt.setString(1, playlist.getArtist());
-            stmt.setString( 2, playlist.getSongtitle());
-            //stmt.setFloat(3, playlist.getDuration());
-            stmt.setString(4, playlist.getFilepath());
+            stmt.setString(1, String.valueOf(playlist.getNbrOfTracks()));
+            stmt.setString( 2, playlist.getPlaylistTitle());
+            stmt.setString(4, String.valueOf(playlist.getId()));
 
             //Run the SQL Command
             stmt.executeUpdate();
@@ -138,11 +137,11 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
         try (Connection conn = databaseConnector.getConnection()){
 
             //SQL Command
-            String sql = "DELETE FROM Playlist WHERE tracknbr = ?;";
+            String sql = "DELETE FROM Playlist WHERE nbrOfTracks = ?;";
 
             //Prepared Statement
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, selectedPlaylist.getTracknbr());
+            stmt.setInt(1, selectedPlaylist.getNbrOfTracks());
 
             //Run the statement
             stmt.executeUpdate();

@@ -2,6 +2,7 @@ package easv.mrs.GUI.Controller;
 
 import easv.mrs.BE.Song;
 import easv.mrs.DAL.db.SongDAO_DB;
+import easv.mrs.GUI.Model.PlaylistModel;
 import easv.mrs.GUI.Model.SongModel;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -42,10 +43,10 @@ public class MyTunesViewController extends BaseController implements Initializab
     public Slider volumeSlider;
     @FXML
     private ListView allSongs, playlists;
-    //@FXML
-   // private ListView<Song> lstSongs;
     @FXML
     private SongModel songModel;
+    @FXML
+    private PlaylistModel playlistModel;
     private File directory;
     private File[]files;
     private ArrayList<File> songs;
@@ -60,6 +61,7 @@ public class MyTunesViewController extends BaseController implements Initializab
     {
         try {
             songModel = new SongModel();
+
         } catch (Exception e) {
             displayError(e);
         }
@@ -99,10 +101,13 @@ public class MyTunesViewController extends BaseController implements Initializab
     public void setup()
     {
         songModel = getModel().getSongModel();
+        playlistModel = getModel().getPlaylistModel();
+
 
         editSongButton.setDisable(false);
 
         allSongs.setItems(songModel.getObservableSongs());
+        playlists.setItems(playlistModel.getObservablePlaylists());
 
         searchSongField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
