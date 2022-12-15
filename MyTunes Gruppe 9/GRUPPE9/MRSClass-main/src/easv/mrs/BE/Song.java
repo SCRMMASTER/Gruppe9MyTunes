@@ -20,11 +20,10 @@ public class Song {
         this.album = album;
         this.year = year;
         this.genre = genre;
-        //this.duration = duration;
         this.filepath = filepath;
     }
 
-    public Song(int id) {
+   public Song(int id) {
 
     }
 
@@ -80,12 +79,6 @@ public class Song {
         this.genre = genre;
     }
 
-   // public float getDuration() {
-        //return duration;
-    //}
-   // public void setDuration(float duration) {
-        //this.duration = duration;
-    //}
     public String getFilepath(){
         return filepath;
     }

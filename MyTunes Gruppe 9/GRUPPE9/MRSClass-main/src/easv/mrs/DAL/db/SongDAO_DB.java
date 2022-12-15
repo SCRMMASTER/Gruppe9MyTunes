@@ -73,7 +73,6 @@ public class SongDAO_DB implements MyTunesDataAccess {
             stmt.setString(3, album);
             stmt.setString(4, String.valueOf(year));
             stmt.setString(5, genre);
-            //stmt.setString(6, String.valueOf(duration));
             stmt.setString(6, filepath);
 
 
@@ -101,22 +100,22 @@ public class SongDAO_DB implements MyTunesDataAccess {
     }
 
     //Update a Song
-    public void updateSong(Song song) throws Exception
+    public void updateSong(Song updatedSong) throws Exception
     {
         try (Connection conn = databaseConnector.getConnection()) {
 
-            String sql = "UPDATE Songs SET artist = ?, songtitle = ?, album = ?, Year = ?, genre = ?, filepath =?, WHERE Id = ?";
+            String sql = "UPDATE Songs SET artist = ?, songtitle = ?, album = ?, Year = ?, genre = ?, filepath =? WHERE Id = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             // Bind the parameters
-            stmt.setString(1, song.getArtist());
-            stmt.setString( 2, song.getSongtitle());
-            stmt.setString(3, song.getAlbum());
-            stmt.setInt(4, song.getYear());
-            stmt.setString(5, song.getGenre());
-            //stmt.setFloat(6, song.getDuration());
-            stmt.setString(6, song.getFilepath());
+            stmt.setString(1, updatedSong.getArtist());
+            stmt.setString( 2, updatedSong.getSongtitle());
+            stmt.setString(3, updatedSong.getAlbum());
+            stmt.setInt(4, updatedSong.getYear());
+            stmt.setString(5, updatedSong.getGenre());
+            stmt.setString(6, updatedSong.getFilepath());
+            stmt.setInt(7, updatedSong.getId());
 
             //Run the SQL Command
             stmt.executeUpdate();

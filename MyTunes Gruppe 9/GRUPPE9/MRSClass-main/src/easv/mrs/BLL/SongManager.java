@@ -9,14 +9,14 @@ import java.util.List;
 public class SongManager {
     private SongSearcher songSearcher = new SongSearcher();
 
-    private MyTunesDataAccess songDAO;
+    private MyTunesDataAccess songDAO_DB;
 
     public SongManager() {
-        songDAO = new SongDAO_DB();
+        songDAO_DB = new SongDAO_DB();
     }
 
     public List<Song> getAllSongs() throws Exception {
-        return songDAO.getAllSongs();
+        return songDAO_DB.getAllSongs();
     }
 
     public List<Song> searchSongs(String query) throws Exception
@@ -28,11 +28,12 @@ public class SongManager {
 
     public Song createNewSong(String artist, String songtitle, String album, int year, String genre, String filepath) throws Exception
     {
-        return songDAO.createSong(artist, songtitle, album, year, genre, filepath);
+        return songDAO_DB.createSong(artist, songtitle, album, year, genre, filepath);
     }
 
     public void updateSong(Song updatedSong) throws Exception
     {
-        songDAO.updateSong(updatedSong);
+        songDAO_DB.updateSong(updatedSong);
     }
+
 }

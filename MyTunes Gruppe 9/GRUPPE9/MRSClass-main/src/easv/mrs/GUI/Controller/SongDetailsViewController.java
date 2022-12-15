@@ -25,17 +25,16 @@ public class SongDetailsViewController extends BaseController {
      */
     public void handleUpdate(ActionEvent actionEvent) throws Exception
     {
+
         String updatedartist = txtArtist.getText();
         String updatedsongtitle = txtSongTitle.getText();
         String updatedalbum = txtAlbum.getText();
         int updatedyear = Integer.parseInt(txtYear.getText());
         String updatedgenre = txtGenre.getText();
-        //float updatedduration = Float.parseFloat(txtDuration.getText());
         String updatedfilepath = txtFilepath.getText();
+        SongModel model = new SongModel();
+        model.updateSong(new Song(-1, updatedartist, updatedsongtitle, updatedalbum, updatedyear, updatedgenre, updatedfilepath));
 
-        Song updatedSong = new Song(model.getSelectedSong().getId(), updatedartist, updatedsongtitle, updatedalbum, updatedyear, updatedgenre, updatedfilepath);
-
-        model.updateSong(updatedSong);
 
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.close();
@@ -47,5 +46,9 @@ public class SongDetailsViewController extends BaseController {
         model = getModel().getSongModel();
         txtArtist.setText(model.getSelectedSong().getArtist());
         txtSongTitle.setText(String.valueOf(model.getSelectedSong().getSongtitle()));
+        txtAlbum.setText(model.getSelectedSong().getAlbum());
+        txtYear.setText(String.valueOf(model.getSelectedSong().getYear()));
+        txtGenre.setText(model.getSelectedSong().getGenre());
+        txtFilepath.setText((model.getSelectedSong().getFilepath()));
     }
 }

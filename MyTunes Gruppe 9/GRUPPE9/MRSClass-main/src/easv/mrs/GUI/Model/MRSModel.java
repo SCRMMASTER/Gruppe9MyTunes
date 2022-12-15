@@ -13,6 +13,7 @@ public class MRSModel {
     }
 
     public void setSongModel(SongModel songModel) {
+
         this.songModel = songModel;
     }
 }

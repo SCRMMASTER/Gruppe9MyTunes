@@ -36,10 +36,10 @@ public class SongModel {
 
     public void createNewSong(String artist, String songtitle, String album, int year, String genre, String filepath) throws Exception
     {
-        // Create movie in data storage
+        // Create Song in data storage
         Song s = songManager.createNewSong(artist, songtitle, album, year, genre, filepath);
 
-        // Add movie to observable list (gui)
+        // Add song to observable list (gui)
         songsToBeHeard.add(s);
     }
 
@@ -55,10 +55,12 @@ public class SongModel {
     }
 
     public Song getSelectedSong() {
-        return selectedSong;
+
+                return selectedSong;
     }
 
     public void setSelectedSong(Song selectedSong) {
+
         this.selectedSong = selectedSong;
     }
 }

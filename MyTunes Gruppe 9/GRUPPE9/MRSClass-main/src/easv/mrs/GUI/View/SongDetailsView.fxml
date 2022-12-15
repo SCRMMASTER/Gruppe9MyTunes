@@ -29,7 +29,8 @@
       </HBox>
       <HBox layoutY="100.0" prefHeight="50.0" prefWidth="442.0">
          <children>
-            <TextField fx:id="Genre" promptText="Genre" />
+            <TextField fx:id="txtGenre" promptText="Genre" />
+            <TextField fx:id="txtFilepath" promptText="filepath" />
          </children>
       </HBox>
    </children>
