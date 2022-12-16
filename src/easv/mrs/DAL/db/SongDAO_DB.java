@@ -60,7 +60,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
     public Song createSong(String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
     {
         // Sql Command
-        String sql = "INSERT INTO Songs (artist,songTitle, album, year, genre, filepath) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO Songs (Artist, SongTitle, Album, Year, Genre, filePath) VALUES (?,?,?,?,?,?);";
 
         try (Connection conn = databaseConnector.getConnection())
         {

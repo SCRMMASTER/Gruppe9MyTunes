@@ -13,11 +13,11 @@ public class NewSongController extends BaseController {
     public TextField artistTextfield, songTextfield, albumTextfield, yearTextfield, gengreTextfield, filePathTextfield;
     @FXML
     public Button addSongButton;
-    //private SongModel model;
+    private SongModel model;
 
     @Override
     public void setup() {
-        //model = getModel().getSongModel();
+        model = getModel().getSongModel();
     }
 
     public void handleAddSong(ActionEvent actionEvent) {
@@ -28,7 +28,7 @@ public class NewSongController extends BaseController {
         String genre = gengreTextfield.getText();
         String filepath = filePathTextfield.getText();
         try {
-            getModel().getSongModel().createNewSong(artist, songTitle, album, year, genre,filepath);
+            model.createSong(artist, songTitle, album, year, genre,filepath);
         } catch (Exception e) {
             e.printStackTrace();
 

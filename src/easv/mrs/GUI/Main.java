@@ -26,6 +26,8 @@ Main extends Application {
 
         primaryStage.setTitle("MyTunes2022");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setMaxHeight(1000);
+        primaryStage.setMaxWidth(1000);
         primaryStage.show();
     }
 

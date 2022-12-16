@@ -35,10 +35,10 @@ public class SongModel {
         songsToBeHeard.addAll(searchResults);
     }
 
-    public void createNewSong(String artist, String songtitle, String album, int year, String genre, String filepath) throws Exception
+    public void createSong(String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
     {
         // Create Song in data storage
-        Song s = songManager.createNewSong(artist, songtitle, album, year, genre, filepath);
+        Song s = songManager.createSong(artist, songTitle, album, year, genre, filepath);
 
         // Add song to observable list (gui)
         songsToBeHeard.add(s);
@@ -71,8 +71,7 @@ public class SongModel {
 
         songsToBeHeard.clear();
         songsToBeHeard.addAll(songManager.getAllSongs());
-
-
+        
     }
 
 
