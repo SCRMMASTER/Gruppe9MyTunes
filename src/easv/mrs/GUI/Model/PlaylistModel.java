@@ -61,4 +61,13 @@ public class PlaylistModel {
     {
         this.selectedPlaylist = selectedPlaylist;
     }
+
+    public void deletePlaylist(Playlist selectedPlaylist) throws Exception {
+        playlistManager.deletePlaylist(selectedPlaylist);
+
+        playlistsToBeHeard.clear();
+        playlistsToBeHeard.addAll(playlistManager.getAllSongsPl());
+
+
+    }
 }

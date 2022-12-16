@@ -307,13 +307,7 @@ public class MyTunesViewController extends BaseController implements Initializab
     public void handleDeletePlaylist(ActionEvent actionEvent) throws Exception
     {
             Playlist selectedPlaylist = (Playlist) playlists.getSelectionModel().getSelectedItem();
-            playlistModel.setSelectedPlaylist(selectedPlaylist);
-
-            PlaylistDAO_DB playlistDAO_db = new PlaylistDAO_DB();
-            playlistDAO_db.deletePlaylist(selectedPlaylist);
-            //playlists.setItems(playlistModel.getObservablePlaylists());
-            playlistDAO_db.getAllSongsPl();
-
+            playlistModel.deletePlaylist(selectedPlaylist);
     }
 
         public void deleteSongOnPlaylist (ActionEvent actionEvent) throws Exception

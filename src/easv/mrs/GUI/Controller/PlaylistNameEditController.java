@@ -22,11 +22,7 @@ public class PlaylistNameEditController extends BaseController {
 
 
     public void renamePlaylist(ActionEvent actionEvent) throws Exception {
-       // Playlist selectedPlaylist = (Playlist) MyTunesViewController.playlists.getSelectionModel().getSelectedItem();
-        //PlaylistModel playlistModel = new PlaylistModel();
-        //playlistModel.setSelectedPlaylist(selectedPlaylist);
 
-       // playlistDAO_db.updatePlaylist(selectedPlaylist);
     }
 
     @Override
