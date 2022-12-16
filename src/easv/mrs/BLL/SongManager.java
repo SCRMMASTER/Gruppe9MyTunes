@@ -1,5 +1,6 @@
 package easv.mrs.BLL;
 
+import easv.mrs.BE.Playlist;
 import easv.mrs.BE.Song;
 import easv.mrs.BLL.util.SongSearcher;
 import easv.mrs.DAL.MyTunesDataAccess;
@@ -34,6 +35,11 @@ public class SongManager {
     public void updateSong(Song updatedSong) throws Exception
     {
         songDAO_DB.updateSong(updatedSong);
+    }
+
+    public void deleteSong(Song selectedSong) throws Exception {
+
+        songDAO_DB.deleteSong(selectedSong);
     }
 
 }

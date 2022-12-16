@@ -315,10 +315,9 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         }
 
-        public void handleDeleteSong (ActionEvent actionEvent)
-        {
-
-
+        public void handleDeleteSong (ActionEvent actionEvent) throws Exception {
+            Song selectedsong = (Song) allSongs.getSelectionModel().getSelectedItem();
+            songModel.deleteSong(selectedsong);
 
         }
 

@@ -1,5 +1,6 @@
 package easv.mrs.GUI.Model;
 
+import easv.mrs.BE.Playlist;
 import easv.mrs.BE.Song;
 import easv.mrs.BLL.SongManager;
 import javafx.collections.FXCollections;
@@ -62,6 +63,16 @@ public class SongModel {
     public void setSelectedSong(Song selectedSong) {
 
         this.selectedSong = selectedSong;
+
+    }
+
+    public void deleteSong(Song selectedSong) throws Exception {
+        songManager.deleteSong(selectedSong);
+
+        songsToBeHeard.clear();
+        songsToBeHeard.addAll(songManager.getAllSongs());
+
+
     }
 
 
