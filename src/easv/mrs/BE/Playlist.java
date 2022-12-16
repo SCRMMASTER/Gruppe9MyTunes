@@ -3,7 +3,8 @@ package easv.mrs.BE;
 /*
  *@author Magnus, Johnni & Jesper
 */
-public class Playlist {
+public class
+Playlist {
 
     // Declare variables for the Playlist
     private int nbrOfTracks;

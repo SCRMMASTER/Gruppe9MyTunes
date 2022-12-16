@@ -1,5 +1,8 @@
 package easv.mrs.GUI.Controller;
 
+import easv.mrs.BE.Playlist;
+import easv.mrs.DAL.db.PlaylistDAO_DB;
+import easv.mrs.GUI.Model.PlaylistModel;
 import easv.mrs.GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,9 +18,15 @@ public class PlaylistNameEditController extends BaseController {
 
     private SongModel model;
 
-    public void renamePlaylist(ActionEvent actionEvent)
-    {
+    PlaylistDAO_DB playlistDAO_db = new PlaylistDAO_DB();
 
+
+    public void renamePlaylist(ActionEvent actionEvent) throws Exception {
+       // Playlist selectedPlaylist = (Playlist) MyTunesViewController.playlists.getSelectionModel().getSelectedItem();
+        //PlaylistModel playlistModel = new PlaylistModel();
+        //playlistModel.setSelectedPlaylist(selectedPlaylist);
+
+       // playlistDAO_db.updatePlaylist(selectedPlaylist);
     }
 
     @Override

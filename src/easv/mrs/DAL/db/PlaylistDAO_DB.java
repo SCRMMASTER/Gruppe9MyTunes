@@ -46,7 +46,6 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
                 allSongsPl.add(playlist);
             }
 
-            System.out.println(allSongsPl.size());
             //Return all songs from playlist
             return allSongsPl;
 
@@ -109,7 +108,7 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
         try (Connection conn = databaseConnector.getConnection()) {
 
-            String sql = "UPDATE Playlist SET nbrOfTracks = ?, playlistTitle = ?";
+            String sql = "UPDATE Playlist SET playlistTitle = ?";
 
             //den gamle SQL statement
             //String sql = "UPDATE Playlist SET artist = ?, songtitle = ?, filepath =?, WHERE tracknbr = ?";
@@ -119,7 +118,6 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             // Bind the parameters
             stmt.setString(1, String.valueOf(playlist.getNbrOfTracks()));
             stmt.setString( 2, playlist.getPlaylistTitle());
-            stmt.setString(4, String.valueOf(playlist.getId()));
 
             //Run the SQL Command
             stmt.executeUpdate();
