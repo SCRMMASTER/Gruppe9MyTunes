@@ -1,5 +1,6 @@
 package easv.mrs.GUI.Controller;
 
+import easv.mrs.BE.Song;
 import easv.mrs.DAL.db.SongDAO_DB;
 import easv.mrs.GUI.Model.SongModel;
 import javafx.event.ActionEvent;
@@ -12,24 +13,24 @@ public class NewSongController extends BaseController {
     public TextField artistTextfield, songTextfield, albumTextfield, yearTextfield, gengreTextfield, filePathTextfield;
     @FXML
     public Button addSongButton;
-    private SongModel model;
+    //private SongModel model;
 
     @Override
     public void setup() {
-        model = getModel().getSongModel();
+        //model = getModel().getSongModel();
     }
 
     public void handleAddSong(ActionEvent actionEvent) {
         String artist = artistTextfield.getText();
-        String songtitle = songTextfield.getText();
+        String songTitle = songTextfield.getText();
         String album = albumTextfield.getText();
         int year = Integer.parseInt(yearTextfield.getText());
         String genre = gengreTextfield.getText();
         String filepath = filePathTextfield.getText();
         try {
-            model.createNewSong(artist, songtitle, album, year, genre, filepath);
+            getModel().getSongModel().createNewSong(artist, songTitle, album, year, genre,filepath);
         } catch (Exception e) {
-
+            e.printStackTrace();
 
         }
     }

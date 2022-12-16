@@ -57,10 +57,10 @@ public class SongDAO_DB implements MyTunesDataAccess {
     }
 
     //Create a new Song object.
-    public Song createSong(String artist, String songtitle, String album, int year, String genre, String filepath) throws Exception
+    public Song createSong(String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
     {
         // Sql Command
-        String sql = "INSERT INTO Songs (artist,songtitle, album, year, genre, filepath) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO Songs (artist,songTitle, album, year, genre, filepath) VALUES (?,?,?,?,?,?);";
 
         try (Connection conn = databaseConnector.getConnection())
         {
@@ -68,7 +68,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
 
             // Bind the parameters
             stmt.setString(1, artist);
-            stmt.setString(2, songtitle);
+            stmt.setString(2, songTitle);
             stmt.setString(3, album);
             stmt.setString(4, String.valueOf(year));
             stmt.setString(5, genre);
@@ -87,7 +87,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
             }
 
             // Create song object and send up the layers
-            Song song = new Song(id, artist, songtitle, album, year, genre, filepath);
+            Song song = new Song(id, artist, songTitle, album, year, genre, filepath);
             return song;
         }
         catch (SQLException ex)
