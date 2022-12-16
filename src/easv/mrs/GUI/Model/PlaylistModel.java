@@ -9,15 +9,10 @@ import javafx.collections.ObservableList;
 import java.util.List;
 
 public class PlaylistModel {
-
     private ObservableList<Playlist> playlistsToBeHeard;
     private PlaylistManager playlistManager;
     private Playlist selectedPlaylist;
 
-    /**
-     * Constructor
-     * @throws Exception
-     */
     public PlaylistModel() throws Exception
     {
         playlistManager = new PlaylistManager();
@@ -25,7 +20,8 @@ public class PlaylistModel {
         playlistsToBeHeard.addAll(playlistManager.getAllSongsPl());
     }
 
-    public ObservableList<Playlist> getObservablePlaylists() {
+    public ObservableList<Playlist> getObservablePlaylists()
+    {
         return playlistsToBeHeard;
     }
 
@@ -56,13 +52,13 @@ public class PlaylistModel {
         playlistsToBeHeard.addAll(playlistManager.getAllSongsPl());
     }
 
-    public Playlist getSelectedPlaylist() {
-
+    public Playlist getSelectedPlaylist()
+    {
         return selectedPlaylist;
     }
 
-    public void setSelectedPlaylist(Playlist selectedPlaylist) {
-
+    public void setSelectedPlaylist(Playlist selectedPlaylist)
+    {
         this.selectedPlaylist = selectedPlaylist;
     }
 }

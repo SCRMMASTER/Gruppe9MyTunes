@@ -4,24 +4,20 @@ import easv.mrs.BE.Playlist;
 import easv.mrs.BE.Song;
 import easv.mrs.DAL.MyTunesDataAccess;
 import easv.mrs.DAL.MyTunesPlaylistAccess;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
-
     private MyDatabaseConnector databaseConnector;
 
-    public PlaylistDAO_DB() {
-
+    public PlaylistDAO_DB()
+    {
         databaseConnector = new MyDatabaseConnector();
     }
 
-
-      //Get all Songs
-    public List<Playlist> getAllSongsPl() throws Exception {
-
+    public List<Playlist> getAllSongsPl() throws Exception
+    {
         ArrayList<Playlist> allSongsPl = new ArrayList<>();
 
         try (Connection conn = databaseConnector.getConnection();
@@ -57,18 +53,15 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
         }
     }
 
-
     @Override
-    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle) throws Exception {
+    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle) throws Exception
+    {
         return null;
     }
 
     //Create a new Playlist object.
-    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle, int id) throws Exception {
-
-        // Sql Command
-
-
+    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle, int id) throws Exception
+    {
         String sql = "INSERT INTO Playlist (artist,songtitle, duration, filepath, id) VALUES (?,?,?,?,?);";
 
         try (Connection conn = databaseConnector.getConnection()) {
@@ -104,8 +97,8 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
     }
 
     //Update a Song
-    public void updatePlaylist(Playlist playlist) throws Exception {
-
+    public void updatePlaylist(Playlist playlist) throws Exception
+    {
         try (Connection conn = databaseConnector.getConnection()) {
 
             String sql = "UPDATE Playlist SET playlistTitle = ?";
@@ -129,9 +122,8 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
     }
 
-    //Delete selected song
-
-    public void deletePlaylist(Playlist selectedPlaylist) throws Exception {
+    public void deletePlaylist(Playlist selectedPlaylist) throws Exception
+    {
         try (Connection conn = databaseConnector.getConnection()){
 
             //SQL Command
@@ -150,11 +142,4 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             throw new Exception("Could not delete Song...", ex);
         }
     }
-
-   // public List<Song> searchSongs(String query) throws Exception {
-
-        //TODO Do this
-     //   throw new UnsupportedOperationException();
-    //}
-
 }
