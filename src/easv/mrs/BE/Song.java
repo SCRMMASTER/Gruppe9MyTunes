@@ -82,6 +82,6 @@ public class Song {
 
     @Override
     public String toString() {
-        return id + ": " + artist + ": " + songtitle + ": " + album + ": " + year + ": " + genre + ": " + filepath;
+        return artist + ", " + songtitle;
     }
 }

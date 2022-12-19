@@ -32,20 +32,20 @@ public class PlaylistModel {
         playlistsToBeHeard.addAll(searchResults);
     }
 
-    public void createNewPlaylist(int nbrOfTracks, String playlistTitle, int id) throws Exception
+    public void createNewPlaylist(String playlistTitle, int id) throws Exception
     {
         // Create Song in data storage
-        Playlist p = playlistManager.createNewPlaylist(nbrOfTracks, playlistTitle);
+        Playlist p = playlistManager.createNewPlaylist(playlistTitle, id);
 
         // Add song to observable list (gui)
         playlistsToBeHeard.add(p);
     }
 
-    public void updatePlaylist(Playlist updatedPlaylist) throws Exception
+    public void renamePlaylist(Playlist selectedPlaylist) throws Exception
     {
         // Call BLL
         // update song in DB
-        playlistManager.updatePlaylist(updatedPlaylist);
+        playlistManager.renamePlaylist(selectedPlaylist);
 
         // update ListView
         playlistsToBeHeard.clear();

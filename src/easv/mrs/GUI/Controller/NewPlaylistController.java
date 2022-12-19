@@ -1,5 +1,7 @@
 package easv.mrs.GUI.Controller;
 
+import easv.mrs.BE.Playlist;
+import easv.mrs.GUI.Model.PlaylistModel;
 import easv.mrs.GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,19 +13,21 @@ public class NewPlaylistController extends BaseController{
     public TextField newPlaylistTextfield;
     @FXML
     public Button newPlaylistButton;
+    @FXML
+    private PlaylistModel model;
 
-    private SongModel model;
+
+
+    public void handleNewPlaylist(ActionEvent actionEvent) throws Exception {
+        String newName = newPlaylistTextfield.getText();
+        model.createNewPlaylist(newName,-1);
+
+    }
 
     @Override
     public void setup()
     {
-        model = getModel().getSongModel();
+        model = getModel().getPlaylistModel();
         newPlaylistTextfield.setText("Name...");
-    }
-
-    public void handleNewPlaylist(ActionEvent actionEvent)
-    {
-
-
     }
 }

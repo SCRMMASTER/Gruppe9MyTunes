@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface MyTunesPlaylistAccess {
     public List<Playlist> getAllSongsPl() throws Exception;
-    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle) throws Exception;
-    public void updatePlaylist(Playlist playlist) throws Exception;
+    public Playlist createPlaylist(String playlistTitle, int id) throws Exception;
+    public void renamePlaylist(Playlist playlist) throws Exception;
     public void deletePlaylist(Playlist playlist) throws Exception;
 }

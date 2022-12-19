@@ -35,6 +35,7 @@ public class SongModel {
         songsToBeHeard.addAll(searchResults);
     }
 
+    /*
     public void createSong(String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
     {
         // Create Song in data storage
@@ -43,7 +44,7 @@ public class SongModel {
         // Add song to observable list (gui)
         songsToBeHeard.add(s);
     }
-
+*/
     public void updateSong(Song updatedSong) throws Exception
     {
         // Call BLL

@@ -27,14 +27,14 @@ public class PlaylistManager {
         return searchResult;
     }
 
-    public Playlist createNewPlaylist(int nbrOfTracks, String playlistTitle) throws Exception
+    public Playlist createNewPlaylist(String playlistTitle, int id) throws Exception
     {
-        return playlistDAO_DB.createPlaylist(nbrOfTracks, playlistTitle);
+        return playlistDAO_DB.createPlaylist(playlistTitle, id);
     }
 
-    public void updatePlaylist(Playlist updatedPlaylist) throws Exception
+    public void renamePlaylist(Playlist selectedPlaylist) throws Exception
     {
-        playlistDAO_DB.updatePlaylist(updatedPlaylist);
+        playlistDAO_DB.renamePlaylist(selectedPlaylist);
     }
 
     public void deletePlaylist(Playlist selectedPlaylist) throws Exception {

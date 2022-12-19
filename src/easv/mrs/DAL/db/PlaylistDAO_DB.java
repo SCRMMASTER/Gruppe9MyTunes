@@ -32,13 +32,11 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             while (rs.next()) {
 
                 //Map the Database roes to the Playlist object
-
-                int nbrOfTracks = rs.getInt("nbrOfTracks");
                 String playlistTitle = rs.getString("playlistTitle");
                 int id = rs.getInt("ID");
                 //String filepath = rs.getString("Filepath");
 
-                Playlist playlist = new Playlist(nbrOfTracks, playlistTitle, id);
+                Playlist playlist = new Playlist(playlistTitle, id);
                 allSongsPl.add(playlist);
             }
 
@@ -53,24 +51,20 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
         }
     }
 
-    @Override
-    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle) throws Exception
-    {
-        return null;
-    }
+
+
 
     //Create a new Playlist object.
-    public Playlist createPlaylist(int nbrOfTracks, String playlistTitle, int id) throws Exception
+    public Playlist createPlaylist(String playlistTitle, int id) throws Exception
     {
-        String sql = "INSERT INTO Playlist (artist,songtitle, duration, filepath, id) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO Playlist (playlistTitle, id) VALUES (?,?);";
 
         try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Bind the parameters
-            stmt.setString(1, String.valueOf(nbrOfTracks));
-            stmt.setString(2, playlistTitle);
-            stmt.setString(4, String.valueOf(id));
+            stmt.setString(1, playlistTitle);
+            stmt.setInt(2, id);
 
 
             // Run the SQL statement
@@ -78,39 +72,35 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
             // Get the generated ID from the DB
             ResultSet rs = stmt.getGeneratedKeys();
-            int tracknbr = 0;
+            int generatedKey = 0;
 
             if (rs.next()) {
-                tracknbr = rs.getInt(1);
+                generatedKey = rs.getInt(1);
             }
 
             // Create playlist object and send up the layers
-            Playlist playlist = new Playlist(nbrOfTracks, playlistTitle, id);
+            Playlist playlist = new Playlist(playlistTitle,generatedKey);
             return playlist;
         }
         catch (SQLException ex)
         {
             ex.printStackTrace();
-            throw new Exception("Could not create movie", ex);
+            throw new Exception("Could not create playlist", ex);
         }
 
     }
 
-    //Update a Song
-    public void updatePlaylist(Playlist playlist) throws Exception
+    //rename a playlist
+    public void renamePlaylist(Playlist selectedPlaylist) throws Exception
     {
         try (Connection conn = databaseConnector.getConnection()) {
 
             String sql = "UPDATE Playlist SET playlistTitle = ?";
 
-            //den gamle SQL statement
-            //String sql = "UPDATE Playlist SET artist = ?, songtitle = ?, filepath =?, WHERE tracknbr = ?";
-
             PreparedStatement stmt = conn.prepareStatement(sql);
-
             // Bind the parameters
-            stmt.setString(1, String.valueOf(playlist.getNbrOfTracks()));
-            stmt.setString( 2, playlist.getPlaylistTitle());
+            stmt.setString( 1, selectedPlaylist.getPlaylistTitle());
+            //stmt.setInt( 2, selectedPlaylist.getId());
 
             //Run the SQL Command
             stmt.executeUpdate();
@@ -127,11 +117,11 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
         try (Connection conn = databaseConnector.getConnection()){
 
             //SQL Command
-            String sql = "DELETE FROM Playlist WHERE nbrOfTracks = ?;";
+            String sql = "DELETE FROM Playlist WHERE playlistTitle = ?;";
 
             //Prepared Statement
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, selectedPlaylist.getNbrOfTracks());
+            stmt.setString(1, (selectedPlaylist.getPlaylistTitle()));
 
             //Run the statement
             stmt.executeUpdate();

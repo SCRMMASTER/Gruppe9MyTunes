@@ -20,6 +20,7 @@ public class NewSongController extends BaseController {
         model = getModel().getSongModel();
     }
 
+    /*
     public void handleAddSong(ActionEvent actionEvent) {
         String artist = artistTextfield.getText();
         String songTitle = songTextfield.getText();
@@ -34,4 +35,6 @@ public class NewSongController extends BaseController {
 
         }
     }
+    */
+
 }

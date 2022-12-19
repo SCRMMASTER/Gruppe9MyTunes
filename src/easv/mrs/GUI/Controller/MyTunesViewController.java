@@ -263,6 +263,10 @@ public class MyTunesViewController extends BaseController implements Initializab
     }
 
     public void handleNewPlaylist(ActionEvent actionEvent) throws IOException {
+
+        Playlist selectedPlaylist = (Playlist) playlists.getSelectionModel().getSelectedItem();
+        playlistModel.setSelectedPlaylist(selectedPlaylist);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/NewPlaylistView.fxml"));
         AnchorPane pane = (AnchorPane) loader.load();
@@ -284,6 +288,10 @@ public class MyTunesViewController extends BaseController implements Initializab
     }
 
     public void handleEditPlaylist(ActionEvent actionEvent) throws IOException {
+
+        Playlist selectedPlaylist = (Playlist) playlists.getSelectionModel().getSelectedItem();
+        playlistModel.setSelectedPlaylist(selectedPlaylist);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/PlaylistRenameView.fxml"));
         AnchorPane pane = (AnchorPane) loader.load();
@@ -315,10 +323,10 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         }
 
-        public void handleDeleteSong (ActionEvent actionEvent) throws Exception {
-            Song selectedsong = (Song) allSongs.getSelectionModel().getSelectedItem();
-            songModel.deleteSong(selectedsong);
-
+        public void handleDeleteSong (ActionEvent actionEvent) throws Exception
+        {
+            Song selectedSong = (Song) allSongs.getSelectionModel().getSelectedItem();
+            songModel.deleteSong(selectedSong);
         }
 
 }
