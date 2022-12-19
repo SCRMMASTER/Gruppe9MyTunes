@@ -27,9 +27,9 @@ public class SongManager {
         return searchResult;
     }
 
-    public Song createSong(String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
+    public Song createSong(int id, String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
     {
-        return songDAO_DB.createSong(artist, songTitle, album, year, genre, filepath);
+        return songDAO_DB.createSong(id,artist, songTitle, album, year, genre, filepath);
     }
 
     public void updateSong(Song updatedSong) throws Exception

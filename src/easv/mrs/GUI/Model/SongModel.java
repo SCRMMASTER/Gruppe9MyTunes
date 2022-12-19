@@ -36,14 +36,14 @@ public class SongModel {
     }
 
 
-    //public void createSong(String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
-    //{
+    public void createSong(int id, String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
+    {
         // Create Song in data storage
-      //&  Song s = songManager.createSong(artist, songTitle, album, year, genre, filepath);
+        Song s = songManager.createSong(id,artist, songTitle, album, year, genre, filepath);
 
         // Add song to observable list (gui)
-        //songsToBeHeard.add(s);
-   // }
+        songsToBeHeard.add(s);
+    }
 
     public void updateSong(Song updatedSong) throws Exception
     {

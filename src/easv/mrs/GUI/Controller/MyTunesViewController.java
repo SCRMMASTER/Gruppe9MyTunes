@@ -116,21 +116,7 @@ public class MyTunesViewController extends BaseController implements Initializab
                 displayError(e);
             }
         });
-/*
-        lstSongs.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (newValue != null) {
-                editSongButton.setDisable(false);
-                txtArtist.setText(newValue.getArtist());
-                txtSongTitle.setText(newValue.getSongtitle());
-                txtAlbum.setText(newValue.getAlbum());
-                txtYear.setText(String.valueOf(newValue.getYear()));
-                txtGenre.setText(newValue.getGenre());
-            }
-            else
-                editSongButton.setDisable(true);
-        });
-*/
     }
 
     private void displayError(Throwable t) {
@@ -142,6 +128,7 @@ public class MyTunesViewController extends BaseController implements Initializab
 
 
     public void handleAddNewSongNew(ActionEvent actionEvent) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/easv/mrs/GUI/View/NewSongView.fxml"));
         AnchorPane pane = (AnchorPane) loader.load();
