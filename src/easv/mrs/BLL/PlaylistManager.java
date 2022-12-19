@@ -27,9 +27,9 @@ public class PlaylistManager {
         return searchResult;
     }
 
-    public Playlist createNewPlaylist(String playlistTitle, int id) throws Exception
+    public Playlist createNewPlaylist(int id, String playlistTitle) throws Exception
     {
-        return playlistDAO_DB.createPlaylist(playlistTitle, id);
+        return playlistDAO_DB.createPlaylist(id, playlistTitle);
     }
 
     public void renamePlaylist(Playlist selectedPlaylist) throws Exception

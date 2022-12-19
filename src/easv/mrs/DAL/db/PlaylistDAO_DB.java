@@ -36,7 +36,7 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
                 int id = rs.getInt("ID");
                 //String filepath = rs.getString("Filepath");
 
-                Playlist playlist = new Playlist(playlistTitle, id);
+                Playlist playlist = new Playlist(id,playlistTitle);
                 allSongsPl.add(playlist);
             }
 
@@ -55,16 +55,16 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
 
     //Create a new Playlist object.
-    public Playlist createPlaylist(String playlistTitle, int id) throws Exception
+    public Playlist createPlaylist(int id, String playlistTitle) throws Exception
     {
-        String sql = "INSERT INTO Playlist (playlistTitle, id) VALUES (?,?);";
+        String sql = "INSERT INTO Playlist (playlistTitle) VALUES (?);";
 
         try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Bind the parameters
+            //stmt.setInt(1, id);
             stmt.setString(1, playlistTitle);
-            stmt.setInt(2, id);
 
 
             // Run the SQL statement
@@ -79,7 +79,7 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             }
 
             // Create playlist object and send up the layers
-            Playlist playlist = new Playlist(playlistTitle,generatedKey);
+            Playlist playlist = new Playlist(id, playlistTitle);
             return playlist;
         }
         catch (SQLException ex)
@@ -95,12 +95,12 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
     {
         try (Connection conn = databaseConnector.getConnection()) {
 
-            String sql = "UPDATE Playlist SET playlistTitle = ?";
+            String sql = "UPDATE Playlist SET playlistTitle = ? WHERE id = ?";
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             // Bind the parameters
             stmt.setString( 1, selectedPlaylist.getPlaylistTitle());
-            //stmt.setInt( 2, selectedPlaylist.getId());
+            stmt.setInt( 2, selectedPlaylist.getId());
 
             //Run the SQL Command
             stmt.executeUpdate();

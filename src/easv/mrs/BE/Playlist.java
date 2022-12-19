@@ -5,11 +5,11 @@ Playlist {
     private String playlistTitle;
     private int id;
 
-    public Playlist(String playlistTitle, int id)
+    public Playlist(int id, String playlistTitle)
     {
-
-        this.playlistTitle = playlistTitle;
         this.id = id;
+        this.playlistTitle = playlistTitle;
+
     }
 
     public String getPlaylistTitle() {

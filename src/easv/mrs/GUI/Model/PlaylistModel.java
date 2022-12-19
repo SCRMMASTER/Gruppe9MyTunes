@@ -35,7 +35,7 @@ public class PlaylistModel {
     public void createNewPlaylist(String playlistTitle, int id) throws Exception
     {
         // Create Song in data storage
-        Playlist p = playlistManager.createNewPlaylist(playlistTitle, id);
+        Playlist p = playlistManager.createNewPlaylist(id, playlistTitle);
 
         // Add song to observable list (gui)
         playlistsToBeHeard.add(p);

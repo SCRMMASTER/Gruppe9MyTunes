@@ -28,7 +28,8 @@ public class PlaylistNameEditController extends BaseController {
 
         String updatedTitle = renamePlaylistTextfield.getText();
 
-        model.renamePlaylist(new Playlist(updatedTitle,model.getSelectedPlaylist().getId()));
+        model.renamePlaylist(new Playlist(model.getSelectedPlaylist().getId(),updatedTitle));
+        System.out.println(model.getSelectedPlaylist().getId());
 
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.close();

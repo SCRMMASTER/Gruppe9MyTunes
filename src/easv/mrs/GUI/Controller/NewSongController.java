@@ -20,7 +20,7 @@ public class NewSongController extends BaseController {
         model = getModel().getSongModel();
     }
 
-    /*
+
     public void handleAddSong(ActionEvent actionEvent) {
         String artist = artistTextfield.getText();
         String songTitle = songTextfield.getText();
@@ -29,12 +29,12 @@ public class NewSongController extends BaseController {
         String genre = gengreTextfield.getText();
         String filepath = filePathTextfield.getText();
         try {
-            model.createSong(artist, songTitle, album, year, genre,filepath);
+          //  model.createSong(artist, songTitle, album, year, genre,filepath);
         } catch (Exception e) {
             e.printStackTrace();
 
         }
     }
-    */
+
 
 }
