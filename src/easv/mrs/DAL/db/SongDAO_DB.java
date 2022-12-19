@@ -1,3 +1,8 @@
+/*
+Created by Group 9.
+Magnus, Jesper and Johnni.
+ */
+
 package easv.mrs.DAL.db;
 
 import easv.mrs.BE.Song;
@@ -14,22 +19,28 @@ public class SongDAO_DB implements MyTunesDataAccess {
         databaseConnector = new MyDatabaseConnector();
     }
 
-    //Get all Songs
+    //Get all the songs from the database
+
     public List<Song> getAllSongs() throws Exception
     {
+
         ArrayList<Song> allSongs = new ArrayList<>();
 
+        //Gets connection and creates the statement.
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement())
         {
+            //The SQL Command.
+
             String sql = "SELECT * FROM Songs;";
 
             ResultSet rs = stmt.executeQuery(sql);
 
             // Loop through all the rows of the database
+
             while (rs.next())
             {
-                //Map the Database roes to the Song object
+                //Map the Database rows to the Song object
 
                 int id = rs.getInt("ID");
                 String artist = rs.getString("Artist");
@@ -37,7 +48,6 @@ public class SongDAO_DB implements MyTunesDataAccess {
                 String album = rs.getString("Album");
                 int year = rs.getInt("Year");
                 String genre = rs.getString("Genre");
-                //float duration = rs.getFloat("Duration");
                 String filepath = rs.getString("Filepath");
 
                 Song song = new Song(id, artist, songtitle, album, year, genre, filepath );
@@ -45,7 +55,9 @@ public class SongDAO_DB implements MyTunesDataAccess {
             }
 
             System.out.println(allSongs.size());
-            //Return all songs
+
+            //Return all the songs
+
             return allSongs;
 
         }
@@ -56,10 +68,12 @@ public class SongDAO_DB implements MyTunesDataAccess {
         }
     }
 
-    //Create a new Song object.
+    //Inserts a new song to the database.
+
     public Song createSong(int id, String artist, String songTitle, String album, int year, String genre, String filePath) throws Exception
     {
-        // Sql Command
+        // The SQL Command.
+
         String sql = "INSERT INTO Songs (artist, songTitle, album, year, genre, filePath) VALUES (?,?,?,?,?,?);";
 
         try (Connection conn = databaseConnector.getConnection())
@@ -67,6 +81,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Bind the parameters
+
             stmt.setString(1, artist);
             stmt.setString(2, songTitle);
             stmt.setString(3, album);
@@ -76,9 +91,11 @@ public class SongDAO_DB implements MyTunesDataAccess {
 
 
             // Run the SQL statement
+
             stmt.executeUpdate();
 
-            // Get the generated ID from the DB
+            // Gets the generated ID from the DB
+
             ResultSet rs = stmt.getGeneratedKeys();
             int generatedKey = 0;
 
@@ -86,7 +103,8 @@ public class SongDAO_DB implements MyTunesDataAccess {
                 generatedKey = rs.getInt(1);
             }
 
-            // Create song object and send up the layers
+            // Creates song object and sends it up the layers.
+
             Song song = new Song(id, artist, songTitle, album, year, genre, filePath);
             return song;
         }
@@ -103,11 +121,14 @@ public class SongDAO_DB implements MyTunesDataAccess {
     {
         try (Connection conn = databaseConnector.getConnection()) {
 
+            //The SQL Command.
+
             String sql = "UPDATE Songs SET artist = ?, songtitle = ?, album = ?, Year = ?, genre = ?, filepath =? WHERE Id = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Bind the parameters
+
             stmt.setString(1, updatedSong.getArtist());
             stmt.setString( 2, updatedSong.getSongtitle());
             stmt.setString(3, updatedSong.getAlbum());
@@ -116,12 +137,9 @@ public class SongDAO_DB implements MyTunesDataAccess {
             stmt.setString(6, updatedSong.getFilepath());
             stmt.setInt(7, updatedSong.getId());
 
-        int updatedRows = stmt.executeUpdate();{
-
-            }
-
             //Run the SQL Command
-            //stmt.executeUpdate();
+
+            stmt.executeUpdate();
         }
         catch (SQLException ex) {
             ex.printStackTrace();
@@ -130,7 +148,7 @@ public class SongDAO_DB implements MyTunesDataAccess {
 
     }
 
-    //Delete selected song
+    //Deletes a song from the database.
 
     public void deleteSong(Song selectedSong) throws Exception
     {

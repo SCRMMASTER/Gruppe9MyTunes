@@ -1,3 +1,8 @@
+/*
+Created by Group 9.
+Magnus, Jesper and Johnni.
+ */
+
 package easv.mrs.DAL.db;
 
 import easv.mrs.BE.Playlist;
@@ -8,6 +13,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//Creates the PlaylistDAO_DB class.
+
 public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
     private MyDatabaseConnector databaseConnector;
 
@@ -16,9 +23,13 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
         databaseConnector = new MyDatabaseConnector();
     }
 
+    //retrive all songs from the playlist database.
+
     public List<Playlist> getAllSongsPl() throws Exception
     {
         ArrayList<Playlist> allSongsPl = new ArrayList<>();
+
+        //Gets a connection and sends the prepared SQL statement.
 
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement())
@@ -28,19 +39,22 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
 
             ResultSet rs = stmt.executeQuery(sql);
 
-            // Loop through all the rows of the database
+            // Loop through all the rows of the database.
+
             while (rs.next()) {
 
-                //Map the Database roes to the Playlist object
+                //Map the Database roes to the Playlist object.
+
                 String playlistTitle = rs.getString("playlistTitle");
                 int id = rs.getInt("ID");
-                //String filepath = rs.getString("Filepath");
+
 
                 Playlist playlist = new Playlist(id,playlistTitle);
                 allSongsPl.add(playlist);
             }
 
-            //Return all songs from playlist
+            //Return all songs from playlist.
+
             return allSongsPl;
 
         }
@@ -57,20 +71,23 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
     //Create a new Playlist object.
     public Playlist createPlaylist(int id, String playlistTitle) throws Exception
     {
+        //SQL Statement.
+
         String sql = "INSERT INTO Playlist (playlistTitle) VALUES (?);";
 
         try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Bind the parameters
-            //stmt.setInt(1, id);
+
             stmt.setString(1, playlistTitle);
 
-
             // Run the SQL statement
+
             stmt.executeUpdate();
 
             // Get the generated ID from the DB
+
             ResultSet rs = stmt.getGeneratedKeys();
             int generatedKey = 0;
 
@@ -79,6 +96,7 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             }
 
             // Create playlist object and send up the layers
+
             Playlist playlist = new Playlist(id, playlistTitle);
             return playlist;
         }
@@ -95,14 +113,19 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
     {
         try (Connection conn = databaseConnector.getConnection()) {
 
+            //SQL statement.
+
             String sql = "UPDATE Playlist SET playlistTitle = ? WHERE id = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
             // Bind the parameters
+
             stmt.setString( 1, selectedPlaylist.getPlaylistTitle());
             stmt.setInt( 2, selectedPlaylist.getId());
 
             //Run the SQL Command
+
             stmt.executeUpdate();
         }
         catch (SQLException ex) {
@@ -111,7 +134,7 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
         }
 
     }
-
+    //Delete a playlist.
     public void deletePlaylist(Playlist selectedPlaylist) throws Exception
     {
         try (Connection conn = databaseConnector.getConnection()){

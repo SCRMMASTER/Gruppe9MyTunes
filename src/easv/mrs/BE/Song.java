@@ -1,4 +1,11 @@
+/*
+Created by Group 9.
+Magnus, Jesper and Johnni.
+ */
+
 package easv.mrs.BE;
+
+//Create the song Class.
 public class Song {
     private int id;
     private String artist;
@@ -7,10 +14,9 @@ public class Song {
 
     private int year;
     private String genre;
-
-    //private float duration;
-
     private String filepath;
+
+    //Create the Constructor/
 
     public Song(int id, String artist, String songtitle, String album, int year, String genre, String filepath) {
 
@@ -23,7 +29,7 @@ public class Song {
         this.filepath = filepath;
     }
 
-
+// Create the getter's and setter's
 
     public int getId() {
         return id;

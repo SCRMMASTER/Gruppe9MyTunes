@@ -1,3 +1,8 @@
+/*
+Created by Group 9.
+Magnus, Jesper and Johnni.
+ */
+
 package easv.mrs.GUI;
 
 import easv.mrs.GUI.Controller.MyTunesViewController;
