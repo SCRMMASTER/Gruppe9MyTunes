@@ -2,7 +2,6 @@
 Created by Group 9.
 Magnus, Jesper and Johnni.
  */
-
 package easv.mrs.GUI;
 
 import easv.mrs.GUI.Controller.MyTunesViewController;
@@ -16,9 +15,6 @@ import javafx.stage.Stage;
 public class
 Main extends Application {
     @Override
-
-
-
     public void start(Stage primaryStage) throws Exception{
 
         FXMLLoader loader = new FXMLLoader();

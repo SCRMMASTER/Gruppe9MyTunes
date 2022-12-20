@@ -2,7 +2,6 @@ package easv.mrs.GUI.Controller;
 
 import easv.mrs.BE.Playlist;
 import easv.mrs.BE.Song;
-import easv.mrs.DAL.db.SongDAO_DB;
 import easv.mrs.GUI.Model.PlaylistModel;
 import easv.mrs.GUI.Model.SongModel;
 import javafx.application.Platform;
@@ -73,7 +72,6 @@ public class MyTunesViewController extends BaseController implements Initializab
         if (files != null) {
             for (File file : files) {
                 songs.add(file);
-                System.out.println(file);
             }
         }
 
@@ -111,7 +109,6 @@ public class MyTunesViewController extends BaseController implements Initializab
                 displayError(e);
             }
         });
-
     }
 
         //Displays an error.
@@ -318,6 +315,5 @@ public class MyTunesViewController extends BaseController implements Initializab
             Song selectedSong = (Song) allSongs.getSelectionModel().getSelectedItem();
             songModel.deleteSong(selectedSong);
         }
-
 }
 

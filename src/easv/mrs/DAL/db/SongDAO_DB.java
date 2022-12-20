@@ -54,12 +54,8 @@ public class SongDAO_DB implements MyTunesDataAccess {
                 allSongs.add(song);
             }
 
-            System.out.println(allSongs.size());
-
             //Return all the songs
-
             return allSongs;
-
         }
         catch (SQLException ex)
         {

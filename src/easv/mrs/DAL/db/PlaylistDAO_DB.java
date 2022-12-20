@@ -6,8 +6,6 @@ Magnus, Jesper and Johnni.
 package easv.mrs.DAL.db;
 
 import easv.mrs.BE.Playlist;
-import easv.mrs.BE.Song;
-import easv.mrs.DAL.MyTunesDataAccess;
 import easv.mrs.DAL.MyTunesPlaylistAccess;
 import java.sql.*;
 import java.util.ArrayList;
@@ -66,8 +64,6 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
     }
 
 
-
-
     //Create a new Playlist object.
     public Playlist createPlaylist(int id, String playlistTitle) throws Exception
     {
@@ -105,7 +101,6 @@ public class PlaylistDAO_DB implements MyTunesPlaylistAccess {
             ex.printStackTrace();
             throw new Exception("Could not create playlist", ex);
         }
-
     }
 
     //rename a playlist

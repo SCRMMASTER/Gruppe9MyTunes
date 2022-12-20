@@ -5,7 +5,6 @@ Magnus, Jesper and Johnni.
 
 package easv.mrs.BLL;
 
-import easv.mrs.BE.Playlist;
 import easv.mrs.BE.Song;
 import easv.mrs.BLL.util.SongSearcher;
 import easv.mrs.DAL.MyTunesDataAccess;
@@ -59,5 +58,4 @@ public class SongManager {
 
         songDAO_DB.deleteSong(selectedSong);
     }
-
 }

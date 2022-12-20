@@ -29,8 +29,4 @@ public class MyTunesModel {
     {
         this.playlistModel = playlistModel;
     }
-
-
-
-
 }

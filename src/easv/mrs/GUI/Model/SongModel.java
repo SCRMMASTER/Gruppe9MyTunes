@@ -1,6 +1,5 @@
 package easv.mrs.GUI.Model;
 
-import easv.mrs.BE.Playlist;
 import easv.mrs.BE.Song;
 import easv.mrs.BLL.SongManager;
 import javafx.collections.FXCollections;
@@ -8,15 +7,10 @@ import javafx.collections.ObservableList;
 import java.util.List;
 
 public class SongModel {
-
     private ObservableList<Song> songsToBeHeard;
     private SongManager songManager;
     private Song selectedSong;
 
-    /**
-     * Constructor
-     * @throws Exception
-     */
     public SongModel() throws Exception
     {
         songManager = new SongManager();
@@ -34,7 +28,6 @@ public class SongModel {
         songsToBeHeard.clear();
         songsToBeHeard.addAll(searchResults);
     }
-
 
     public void createSong(int id, String artist, String songTitle, String album, int year, String genre, String filepath) throws Exception
     {
@@ -72,8 +65,5 @@ public class SongModel {
 
         songsToBeHeard.clear();
         songsToBeHeard.addAll(songManager.getAllSongs());
-        
     }
-
-
 }

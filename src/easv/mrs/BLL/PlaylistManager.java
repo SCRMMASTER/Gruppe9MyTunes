@@ -7,10 +7,10 @@ package easv.mrs.BLL;
 
 import easv.mrs.BE.Playlist;
 import easv.mrs.BLL.util.PlaylistSearcher;
-import easv.mrs.DAL.MyTunesDataAccess;
 import easv.mrs.DAL.MyTunesPlaylistAccess;
 import easv.mrs.DAL.db.PlaylistDAO_DB;
 import java.util.List;
+
 //Create the class Playlistmanager
 public class PlaylistManager {
     private PlaylistSearcher playlistSearcher = new PlaylistSearcher();

@@ -34,8 +34,6 @@ public class Playlist {
         this.id = id;
     }
 
-
-
     @Override
     public String toString() {
         return playlistTitle;

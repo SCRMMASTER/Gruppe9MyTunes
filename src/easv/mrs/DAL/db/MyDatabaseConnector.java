@@ -26,7 +26,6 @@ public class MyDatabaseConnector {
         dataSource.setUser("CSe22A_14");
         dataSource.setPassword("CSe22A_14");
         dataSource.setTrustServerCertificate(true);
-        //dataSource.setPortNumber(1433);
     }
 //Sends the logon information.
 

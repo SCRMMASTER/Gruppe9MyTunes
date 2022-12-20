@@ -1,8 +1,6 @@
 package easv.mrs.GUI.Controller;
 
-import easv.mrs.BE.Playlist;
 import easv.mrs.GUI.Model.PlaylistModel;
-import easv.mrs.GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

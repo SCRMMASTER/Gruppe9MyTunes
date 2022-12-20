@@ -37,8 +37,6 @@
     <Button fx:id="newPlaylistButton" layoutX="31.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleNewPlaylist" prefHeight="26.0" prefWidth="53.0" text="New..." />
     <Button fx:id="editPlaylistButton" layoutX="98.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleEditPlaylist" prefHeight="26.0" prefWidth="53.0" text="Edit..." />
     <Button fx:id="deletePlaylistButton" layoutX="162.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleDeletePlaylist" prefHeight="26.0" prefWidth="64.0" text="Delete" />
-    <Button fx:id="songUpSort" layoutX="269.0" layoutY="544.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="34.0" text="↑" />
-    <Button fx:id="songDownSort" layoutX="313.0" layoutY="544.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="34.0" text="↓" />
     <Button fx:id="deleteSongFromPlaylistButton" layoutX="398.0" layoutY="544.0" mnemonicParsing="false" onAction="#deleteSongOnPlaylist" prefHeight="26.0" prefWidth="53.0" text="Delete" />
     <Button fx:id="newSongButton" layoutX="472.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleAddNewSongNew" prefHeight="26.0" prefWidth="53.0" text="New..." />
     <Button fx:id="editSongButton" layoutX="536.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="26.0" prefWidth="53.0" text="Edit..." />

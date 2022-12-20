@@ -1,7 +1,5 @@
 package easv.mrs.GUI.Controller;
 
-import easv.mrs.BE.Song;
-import easv.mrs.DAL.db.SongDAO_DB;
 import easv.mrs.GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -21,7 +21,6 @@ public class PlaylistSearcher {
                 searchResult.add(playlist);
             }
         }
-
         return searchResult;
     }
 
