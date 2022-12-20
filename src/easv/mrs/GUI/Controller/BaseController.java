@@ -2,6 +2,7 @@ package easv.mrs.GUI.Controller;
 
 import easv.mrs.GUI.Model.MRSModel;
 
+//All Controllers extend this Base Controller.
 public abstract class BaseController {
 
     private MRSModel model;

@@ -15,17 +15,11 @@ public class SongDetailsViewController extends BaseController {
     public Button btnUpdate;
     @FXML
     private TextField txtArtist, txtSongTitle, txtAlbum, txtYear, txtGenre, txtFilepath;
-    @FXML
     private SongModel model;
 
-    /**
-     *
-     * @param actionEvent
-     * @throws Exception
-     */
+    //Edits Song details from user input.
     public void handleUpdate(ActionEvent actionEvent) throws Exception
     {
-
         String updatedartist = txtArtist.getText();
         String updatedsongtitle = txtSongTitle.getText();
         String updatedalbum = txtAlbum.getText();

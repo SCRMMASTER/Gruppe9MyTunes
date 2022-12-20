@@ -2,9 +2,7 @@ package easv.mrs.GUI.Controller;
 
 import easv.mrs.BE.Playlist;
 import easv.mrs.BE.Song;
-import easv.mrs.DAL.db.PlaylistDAO_DB;
 import easv.mrs.DAL.db.SongDAO_DB;
-import easv.mrs.GUI.Model.MRSModel;
 import easv.mrs.GUI.Model.PlaylistModel;
 import easv.mrs.GUI.Model.SongModel;
 import javafx.application.Platform;
@@ -23,10 +21,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.WriteAbortedException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,23 +32,17 @@ public class MyTunesViewController extends BaseController implements Initializab
     @FXML
     private TextField txtSongSearch, searchSongField, txtArtist, txtSongTitle, txtAlbum, txtAlbumTrack, txtYear, txtGenre,
             txtFilepath;
-
     @FXML
     private Button editSongButton, closeAppButton, previousSongButton, playPauseButton, nextSongButton, toPlaylistButton,
             newPlaylistButton, editPlaylistButton, deletePlaylistButton, songUpSort, songDownSort, deleteSongFromPlaylistButton,
             newSongButton, deleteSongButton;
     @FXML
-    public Text currentSongDisplay;
+    private Text currentSongDisplay;
     @FXML
-    public ListView songsOnPlaylist;
-    public Slider volumeSlider;
+    private Slider volumeSlider;
     @FXML
-    private ListView allSongs;
-    @FXML
-    public ListView playlists;
-    @FXML
+    private ListView allSongs, playlists, songsOnPlaylist;
     private SongModel songModel;
-    @FXML
     private PlaylistModel playlistModel;
     private File directory;
     private File[] files;
@@ -60,8 +51,6 @@ public class MyTunesViewController extends BaseController implements Initializab
     private boolean isPlaying;
     private Media media;
     private MediaPlayer mediaPlayer;
-
-    SongDAO_DB songDAO_db;
 
     public MyTunesViewController() {
         try {
@@ -74,10 +63,13 @@ public class MyTunesViewController extends BaseController implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //Creates a new ArrayList to hold our music library.
         songs = new ArrayList<File>();
         directory = new File("songsFolder");
         files = directory.listFiles();
 
+        //Loops through files and adds them to the directory.
         if (files != null) {
             for (File file : files) {
                 songs.add(file);
@@ -85,9 +77,10 @@ public class MyTunesViewController extends BaseController implements Initializab
             }
         }
 
+        //Creating the MediaPlayer
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
-
+        //Display Current track
         currentSongDisplay.setText(songs.get(songNumber).getName());
 
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -100,15 +93,17 @@ public class MyTunesViewController extends BaseController implements Initializab
 
     @Override
     public void setup() {
+        //Getting models for Song and Playlist.
         songModel = getModel().getSongModel();
         playlistModel = getModel().getPlaylistModel();
 
-
         editSongButton.setDisable(false);
 
+        //Displays data to listviews.
         allSongs.setItems(songModel.getObservableSongs());
         playlists.setItems(playlistModel.getObservablePlaylists());
 
+        //Enables the search function.
         searchSongField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
@@ -119,6 +114,7 @@ public class MyTunesViewController extends BaseController implements Initializab
 
     }
 
+        //Displays an error.
     private void displayError(Throwable t) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Something went wrong");
@@ -126,7 +122,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         alert.showAndWait();
     }
 
-
+        //Opens window for adding a New Song. Waits for input from the user.
     public void handleAddNewSongNew(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
@@ -137,7 +133,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         controller.setModel(super.getModel());
         controller.setup();
 
-        // Create the dialog Stage.
+        //Creates the dialog Stage.
         Stage dialogWindow = new Stage();
         dialogWindow.setTitle("New Song");
         dialogWindow.initModality(Modality.WINDOW_MODAL);
@@ -145,14 +141,15 @@ public class MyTunesViewController extends BaseController implements Initializab
         Scene scene = new Scene(pane);
         dialogWindow.setScene(scene);
 
-        // Show the dialog and wait until the user closes it
+        //Opens window and waits for user input.
         dialogWindow.showAndWait();
     }
-
+        //Opens window for user to edit details of chosen Song.
     public void handleEdit(ActionEvent actionEvent) throws IOException {
         Song selectedSong = (Song) allSongs.getSelectionModel().getSelectedItem();
         songModel.setSelectedSong(selectedSong);
 
+        //Wrapped in if statement to avoid run-time error.
         if (selectedSong != null) {
 
             FXMLLoader loader = new FXMLLoader();
@@ -163,7 +160,7 @@ public class MyTunesViewController extends BaseController implements Initializab
             controller.setModel(super.getModel());
             controller.setup();
 
-            // Create the dialog Stage.
+            //Creates the dialog Stage.
             Stage dialogWindow = new Stage();
             dialogWindow.setTitle("Edit Song Details");
             dialogWindow.initModality(Modality.WINDOW_MODAL);
@@ -171,22 +168,23 @@ public class MyTunesViewController extends BaseController implements Initializab
             Scene scene = new Scene(pane);
             dialogWindow.setScene(scene);
 
-            // Show the dialog and wait until the user closes it
+            //Opens window and waits for user input.
             dialogWindow.showAndWait();
-
         }
-
     }
 
+        //Closes the application.
     public void handleCloseApplication(ActionEvent actionEvent) {
         Platform.exit();
     }
 
+        //Updates the views.
     public void handleSearchSong(ActionEvent actionEvent) throws Exception {
         SongModel model = new SongModel();
         model.getObservableSongs();
     }
 
+        //Enables user to backtrack through the library.
     public void handlePreviousSong(ActionEvent actionEvent) {
         if (songNumber > 0) {
             songNumber--;
@@ -211,6 +209,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         }
     }
 
+        //Plays and pauses the track.
     public void handlePlaySong(ActionEvent actionEvent) {
         if (isPlaying) {
             mediaPlayer.pause();
@@ -221,6 +220,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         }
     }
 
+        //Enables the user to skip through tracks.
     public void handleNextSong(ActionEvent actionEvent) {
         if (songNumber < songs.size() - 1) {
             songNumber++;
@@ -249,6 +249,7 @@ public class MyTunesViewController extends BaseController implements Initializab
 
     }
 
+    //Opens window to create New Playlist
     public void handleNewPlaylist(ActionEvent actionEvent) throws IOException {
 
         Playlist selectedPlaylist = (Playlist) playlists.getSelectionModel().getSelectedItem();
@@ -262,7 +263,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         controller.setModel(super.getModel());
         controller.setup();
 
-        // Create the dialog Stage.
+        //Creates the dialog Stage.
         Stage dialogWindow = new Stage();
         dialogWindow.setTitle("New Playlist");
         dialogWindow.initModality(Modality.WINDOW_MODAL);
@@ -270,10 +271,10 @@ public class MyTunesViewController extends BaseController implements Initializab
         Scene scene = new Scene(pane);
         dialogWindow.setScene(scene);
 
-        // Show the dialog and wait until the user closes it
+        //Opens window and waits for user input.
         dialogWindow.showAndWait();
     }
-
+        //Opens window for user to edit the name of A Playlist.
     public void handleEditPlaylist(ActionEvent actionEvent) throws IOException {
 
         Playlist selectedPlaylist = (Playlist) playlists.getSelectionModel().getSelectedItem();
@@ -287,7 +288,7 @@ public class MyTunesViewController extends BaseController implements Initializab
         controller.setModel(super.getModel());
         controller.setup();
 
-        // Create the dialog Stage.
+        //Creates the dialog Stage.
         Stage dialogWindow = new Stage();
         dialogWindow.setTitle("Rename Playlist");
         dialogWindow.initModality(Modality.WINDOW_MODAL);
@@ -295,10 +296,11 @@ public class MyTunesViewController extends BaseController implements Initializab
         Scene scene = new Scene(pane);
         dialogWindow.setScene(scene);
 
-        // Show the dialog and wait until the user closes it
+        //Opens window and waits for user input.
         dialogWindow.showAndWait();
     }
 
+        //Deletes a Playlist
     public void handleDeletePlaylist(ActionEvent actionEvent) throws Exception
     {
             Playlist selectedPlaylist = (Playlist) playlists.getSelectionModel().getSelectedItem();
@@ -310,6 +312,7 @@ public class MyTunesViewController extends BaseController implements Initializab
 
         }
 
+        //Deletes a Song.
         public void handleDeleteSong (ActionEvent actionEvent) throws Exception
         {
             Song selectedSong = (Song) allSongs.getSelectionModel().getSelectedItem();

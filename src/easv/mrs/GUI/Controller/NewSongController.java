@@ -13,10 +13,9 @@ public class NewSongController extends BaseController {
     public TextField artistTextfield, songTextfield, albumTextfield, yearTextfield, gengreTextfield, filePathTextfield;
     @FXML
     public Button addSongButton;
-    @FXML
     private SongModel model;
 
-
+    //Creates a new Song.
     public void handleAddSong(ActionEvent actionEvent) {
 
         int id = -1;
@@ -27,13 +26,9 @@ public class NewSongController extends BaseController {
         String genre = gengreTextfield.getText();
         String filepath = filePathTextfield.getText();
         try {
-
             model.createSong(id, artist, songTitle, album, year, genre,filepath);
-
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 

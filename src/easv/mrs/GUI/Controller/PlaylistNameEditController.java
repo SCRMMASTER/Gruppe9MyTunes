@@ -19,13 +19,11 @@ public class PlaylistNameEditController extends BaseController {
     public TextField renamePlaylistTextfield;
     @FXML
     public Button executeRenameButton;
-    @FXML
     private PlaylistModel model;
 
-
+    //Renames a Playlist.
     public void renamePlaylist(ActionEvent actionEvent) throws Exception
     {
-
         String updatedTitle = renamePlaylistTextfield.getText();
 
         model.renamePlaylist(new Playlist(model.getSelectedPlaylist().getId(),updatedTitle));
@@ -33,7 +31,6 @@ public class PlaylistNameEditController extends BaseController {
 
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.close();
-
     }
 
     @Override

@@ -9,6 +9,7 @@ import easv.mrs.BE.Playlist;
 import java.util.ArrayList;
 import java.util.List;
 
+//Create the song searcher class.
 public class PlaylistSearcher {
     public List<Playlist> search(List<Playlist> searchBase, String query)
     {
@@ -24,11 +25,13 @@ public class PlaylistSearcher {
         return searchResult;
     }
 
+    //Sort input to Artist name.
     private boolean compareToPlaylistArtist(String query, Playlist playlist)
     {
         return playlist.getPlaylistTitle().toLowerCase().contains(query.toLowerCase());
     }
 
+    //Sort input to album name.
     private boolean compareToPlaylistSongTitle(String query, Playlist playlist)
     {
         return playlist.getPlaylistTitle().toLowerCase().contains(query.toLowerCase());

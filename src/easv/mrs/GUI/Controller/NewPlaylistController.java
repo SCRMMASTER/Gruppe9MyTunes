@@ -15,18 +15,15 @@ public class NewPlaylistController extends BaseController{
     public TextField newPlaylistTextfield;
     @FXML
     public Button newPlaylistButton;
-    @FXML
     private PlaylistModel model;
 
-
-
+    //Creates a new Playlist.
     public void handleNewPlaylist(ActionEvent actionEvent) throws Exception {
         String newName = newPlaylistTextfield.getText();
         model.createNewPlaylist(newName,-1);
 
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.close();
-
     }
 
     @Override
