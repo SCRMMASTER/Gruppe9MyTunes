@@ -1,17 +1,17 @@
 package easv.mrs.GUI.Controller;
 
-import easv.mrs.GUI.Model.MRSModel;
+import easv.mrs.GUI.Model.MyTunesModel;
 
 //All Controllers extend this Base Controller.
 public abstract class BaseController {
 
-    private MRSModel model;
+    private MyTunesModel model;
 
-    public void setModel(MRSModel model) {
+    public void setModel(MyTunesModel model) {
         this.model = model;
     }
 
-    public MRSModel getModel() {
+    public MyTunesModel getModel() {
         return model;
     }
 

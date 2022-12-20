@@ -6,7 +6,7 @@ Magnus, Jesper and Johnni.
 package easv.mrs.GUI;
 
 import easv.mrs.GUI.Controller.MyTunesViewController;
-import easv.mrs.GUI.Model.MRSModel;
+import easv.mrs.GUI.Model.MyTunesModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +26,7 @@ Main extends Application {
         Parent root = loader.load();
 
         MyTunesViewController controller = loader.getController();
-        controller.setModel(new MRSModel());
+        controller.setModel(new MyTunesModel());
         controller.setup();
 
         primaryStage.setTitle("MyTunes2022");

@@ -1,11 +1,11 @@
 package easv.mrs.GUI.Model;
 
-public class MRSModel {
+public class MyTunesModel {
 
     private SongModel songModel;
     private PlaylistModel playlistModel;
 
-    public MRSModel() throws Exception {
+    public MyTunesModel() throws Exception {
         songModel = new SongModel();
         playlistModel = new PlaylistModel();
 
